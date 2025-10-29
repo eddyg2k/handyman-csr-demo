@@ -1,11 +1,4 @@
-interface Lead {
-  id: string;
-  name: string;
-  phone: string;
-  status: "New" | "In Progress" | "Completed";
-  city: string;
-  description: string;
-}
+import type { Lead } from "@/lib/types";
 
 interface LeadCardProps {
   lead: Lead;
