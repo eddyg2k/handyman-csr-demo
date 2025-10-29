@@ -1,4 +1,6 @@
-export const leads = [
+import type { Lead } from "@/lib/types";
+
+export const leads: Lead[] = [
   {
     id: "1",
     name: "John Doe",
