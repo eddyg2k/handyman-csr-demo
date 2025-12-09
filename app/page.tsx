@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const highlights = [
   {
@@ -64,6 +64,21 @@ const craftsmanshipShots = [
 ];
 
 export default function Home() {
+  const services = [
+    "General Repairs",
+    "Carpentry",
+    "Drywall",
+    "Electrical",
+    "Plumbing",
+    "Exterior Repairs",
+  ];
+
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+
+  const closeModal = () => {
+    setSelectedService(null);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -88,6 +103,32 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.12),_transparent_35%),radial-gradient(circle_at_30%_40%,_rgba(239,68,68,0.12),_transparent_35%)]" />
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-20 px-6 pb-24 pt-16 sm:px-8 lg:px-10">
+        <section className="min-h-screen flex flex-col items-center justify-center gap-8 p-8">
+          <h1 className="text-3xl">Service Menu</h1>
+          <div className="grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {services.map((service) => (
+              <button
+                key={service}
+                className="border border-white/30 bg-white/5 p-4 text-left"
+                onClick={() => setSelectedService(service)}
+              >
+                {service}
+              </button>
+            ))}
+          </div>
+
+          {selectedService && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+              <div className="w-full max-w-md space-y-4 bg-white p-6 text-center text-slate-900">
+                <h2 className="text-xl">Add Details for {selectedService}</h2>
+                <button className="border px-4 py-2" onClick={closeModal}>
+                  Close
+                </button>
+              </div>
+            </div>
+          )}
+        </section>
+
         <header className="grid min-h-[70vh] gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="space-y-6">
             <p className="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-sky-200 ring-1 ring-white/10">
