@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -42,6 +43,23 @@ const storyMoments = [
     title: "Hand off with confidence",
     text: "Send technicians crystal-clear work orders with timelines and customer expectations baked in.",
     metric: "7 jobs routed",
+  },
+];
+
+const craftsmanshipShots = [
+  {
+    src: "/handyman-toolkit.svg",
+    alt: "Handyman assembling a tool kit",
+    badge: "Tool prep",
+    title: "Arrive ready",
+    description: "Fresh blades, charged batteries, and tidy totes keep CSRs confident when dispatching calls.",
+  },
+  {
+    src: "/handyman-crew.svg",
+    alt: "Handyman crew reviewing a work order",
+    badge: "On-site clarity",
+    title: "Align the crew",
+    description: "Photo-rich briefs make it obvious who’s doing what, reducing back-and-forth while on the job.",
   },
 ];
 
@@ -160,6 +178,51 @@ export default function Home() {
                 <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-200">
                   <span className="size-2 rounded-full bg-emerald-400" aria-hidden />
                   {moment.metric}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="reveal space-y-8 rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-xl shadow-black/20">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Handyman visuals</p>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">Ground the story with real craft</h2>
+              <p className="mt-3 max-w-3xl text-lg text-slate-300">
+                Add visual proof that your team is organized, prepared, and communicating clearly. These shots pair with the
+                scrolling copy to show homeowners the calm, capable crew behind the phone call.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-semibold text-slate-100 ring-1 ring-white/10">
+              <span className="size-2 rounded-full bg-emerald-400" aria-hidden />
+              Updated with fresh handyman scenes
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {craftsmanshipShots.map((shot, index) => (
+              <div
+                key={shot.title}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/90 to-slate-950/80"
+                style={{ transitionDelay: `${index * 80}ms` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" aria-hidden />
+                <Image
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={1024}
+                  height={768}
+                  className="h-72 w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                  priority={index === 0}
+                />
+                <div className="absolute bottom-4 left-4 right-4 space-y-2 rounded-xl bg-slate-900/70 p-4 shadow-lg shadow-black/30 backdrop-blur">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-100">
+                    <span className="size-2 rounded-full bg-sky-400" aria-hidden />
+                    {shot.badge}
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">{shot.title}</h3>
+                  <p className="text-sm text-slate-200">{shot.description}</p>
                 </div>
               </div>
             ))}
