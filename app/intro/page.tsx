@@ -102,7 +102,7 @@ export default function Intro() {
             <motion.div
               key={item}
               className="rounded-2xl border border-white/10 bg-white/10 p-4 text-left shadow-lg shadow-black/20 backdrop-blur"
-              whileHover={{ translateY: -6, backgroundColor: "rgba(255,255,255,0.14)" }}
+              whileHover={{ transform: "translateY(-6px)", backgroundColor: "rgba(255,255,255,0.14)" }}
               transition={{ duration: 0.4 }}
             >
               <p className="text-sm font-semibold text-sky-100">{item}</p>

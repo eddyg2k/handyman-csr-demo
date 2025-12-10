@@ -9,7 +9,7 @@ export type MotionTransition = {
   ease?: string;
 };
 
-export type MotionProps<T extends ElementType> = {
+export type MotionProps<T extends keyof JSX.IntrinsicElements> = {
   initial?: MotionStyle;
   animate?: MotionStyle;
   whileHover?: MotionStyle;
@@ -18,7 +18,7 @@ export type MotionProps<T extends ElementType> = {
   style?: CSSProperties;
 } & Omit<ComponentPropsWithoutRef<T>, "style">;
 
-type MotionComponent<T extends ElementType> = ForwardRefExoticComponent<
+type MotionComponent<T extends keyof JSX.IntrinsicElements> = ForwardRefExoticComponent<
   PropsWithoutRef<MotionProps<T>> & RefAttributes<Element>
 >;
 
@@ -31,7 +31,7 @@ function mergeStyles(base?: CSSProperties, incoming?: MotionStyle) {
   return { ...base, ...(incoming || {}) } satisfies CSSProperties;
 }
 
-function createMotionComponent<T extends ElementType>(
+function createMotionComponent<T extends keyof JSX.IntrinsicElements>(
   Component: T
 ): MotionComponent<T> {
   return forwardRef<Element, MotionProps<T>>(function MotionComponent(
@@ -55,38 +55,39 @@ function createMotionComponent<T extends ElementType>(
       }
     }, [animateStyle, transition]);
 
-    const handleMouseEnter = (event: React.MouseEvent<Element, MouseEvent>) => {
+    const handleMouseEnter = (event: React.MouseEvent<HTMLElement | SVGElement, MouseEvent>) => {
       setActiveStyle((prev) => ({ ...prev, ...hoverStyle }));
-      onMouseEnter?.(event);
+      onMouseEnter?.(event as never);
     };
 
-    const handleMouseLeave = (event: React.MouseEvent<Element, MouseEvent>) => {
+    const handleMouseLeave = (event: React.MouseEvent<HTMLElement | SVGElement, MouseEvent>) => {
       setActiveStyle((prev) => ({ ...prev, ...animateStyle }));
-      onMouseLeave?.(event);
+      onMouseLeave?.(event as never);
     };
 
-    const handleMouseDown = (event: React.MouseEvent<Element, MouseEvent>) => {
+    const handleMouseDown = (event: React.MouseEvent<HTMLElement | SVGElement, MouseEvent>) => {
       setActiveStyle((prev) => ({ ...prev, ...tapStyle }));
-      onMouseDown?.(event);
+      onMouseDown?.(event as never);
     };
 
-    const handleMouseUp = (event: React.MouseEvent<Element, MouseEvent>) => {
+    const handleMouseUp = (event: React.MouseEvent<HTMLElement | SVGElement, MouseEvent>) => {
       setActiveStyle((prev) => ({ ...prev, ...hoverStyle }));
-      onMouseUp?.(event);
+      onMouseUp?.(event as never);
     };
 
     const mergedStyle = mergeStyles(activeStyle, style);
 
-    return (
-      <Component
-        ref={ref as never}
-        style={mergedStyle}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        {...(rest as Record<string, unknown>)}
-      />
+    return React.createElement(
+      Component as ElementType,
+      {
+        ref: ref as never,
+        style: mergedStyle,
+        onMouseEnter: handleMouseEnter,
+        onMouseLeave: handleMouseLeave,
+        onMouseDown: handleMouseDown,
+        onMouseUp: handleMouseUp,
+        ...(rest as Record<string, unknown>),
+      } as Record<string, unknown>
     );
   });
 }
@@ -94,7 +95,7 @@ function createMotionComponent<T extends ElementType>(
 const motion = new Proxy(
   {},
   {
-    get: (_target, key: string) => createMotionComponent(key as ElementType),
+    get: (_target, key: string) => createMotionComponent(key as keyof JSX.IntrinsicElements),
   }
 ) as {
   [K in keyof JSX.IntrinsicElements]: MotionComponent<K>;
