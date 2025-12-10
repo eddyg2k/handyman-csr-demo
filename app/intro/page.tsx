@@ -79,7 +79,7 @@ export default function Intro() {
           transition={{ duration: 0.9, delay: 0.65 }}
         >
           <Link
-            href="/"
+            href="/experience"
             className="rounded-full bg-brand-blue px-8 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5 hover:shadow-sky-400/40"
           >
             Enter the experience
