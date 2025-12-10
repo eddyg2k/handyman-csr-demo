@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { IntroOverlay } from "../components/IntroOverlay";
 
 const highlights = [
   {
@@ -74,6 +75,7 @@ export default function Home() {
   ];
 
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [showIntro, setShowIntro] = useState(true);
 
   const closeModal = () => {
     setSelectedService(null);
@@ -98,8 +100,28 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const introTimer = setTimeout(() => setShowIntro(false), 5200);
+    return () => clearTimeout(introTimer);
+  }, []);
+
+  useEffect(() => {
+    if (showIntro) {
+      const previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = previousOverflow;
+      };
+    }
+
+    document.body.style.overflow = "";
+    return undefined;
+  }, [showIntro]);
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+    <>
+      <IntroOverlay visible={showIntro} />
+      <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.12),_transparent_35%),radial-gradient(circle_at_30%_40%,_rgba(239,68,68,0.12),_transparent_35%)]" />
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-20 px-6 pb-24 pt-16 sm:px-8 lg:px-10">
@@ -348,5 +370,6 @@ export default function Home() {
         </section>
       </div>
     </main>
+    </>
   );
 }
