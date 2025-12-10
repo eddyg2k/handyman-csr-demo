@@ -16,3 +16,68 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+.intro-background {
+  animation: introBackgroundDrift 5s ease-in-out forwards;
+}
+
+.intro-frame {
+  animation: introFrame 5s ease-in-out forwards;
+}
+
+.intro-frame.delay {
+  animation-delay: 2.5s;
+}
+
+.intro-beam {
+  animation: introBeam 5s ease-in-out forwards;
+}
+
+@keyframes introBackgroundDrift {
+  0% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  30% {
+    opacity: 0.55;
+    transform: scale(1.03);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes introFrame {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-12px) scale(1.02);
+  }
+}
+
+@keyframes introBeam {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  40% {
+    opacity: 0.65;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}

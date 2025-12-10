@@ -63,6 +63,88 @@ const craftsmanshipShots = [
   },
 ];
 
+const introBackgrounds = [
+  {
+    src: "/handyman logo sunset high pixel.png",
+    alt: "Sunset-lit handyman badge",
+  },
+  {
+    src: "/logo on desk with sun.svg",
+    alt: "Branded mark on a sun-washed desk",
+  },
+  {
+    src: "/Orange and Blue Retro Illustrative Cleaning Handyman Delivery Platform Logo.png",
+    alt: "Retro illustrated handyman crest",
+  },
+];
+
+function AnimatedIntro() {
+  return (
+    <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/80 p-6 shadow-2xl shadow-black/30">
+      <div className="absolute inset-0 grid grid-cols-3 gap-4 opacity-50 blur-xl" aria-hidden>
+        {introBackgrounds.map((background, index) => (
+          <div key={background.src} className="relative h-32 sm:h-40">
+            <Image
+              src={background.src}
+              alt={background.alt}
+              fill
+              priority
+              className="intro-background rounded-2xl object-cover"
+              style={{ animationDelay: `${index * 0.35}s` }}
+            />
+          </div>
+        ))}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/40 to-slate-950/80" />
+      </div>
+
+      <div className="relative grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div className="space-y-3">
+          <p className="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-sky-200 ring-1 ring-white/10">
+            <span className="size-2 rounded-full bg-emerald-400" aria-hidden />
+            Animated intro
+          </p>
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">
+            5-second glide into the handyman story
+          </h2>
+          <p className="max-w-2xl text-sm text-slate-200 sm:text-base">
+            Two illustrated beats fade in sequence while branded textures hover behind them. It runs once on load to set a cinematic tone without slowing the rest of the page.
+          </p>
+        </div>
+
+        <div className="relative mx-auto h-64 w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/80 via-slate-950/70 to-slate-900/80 p-4 shadow-lg shadow-black/30">
+          <div className="pointer-events-none intro-beam absolute -left-10 top-6 h-24 w-24 rounded-full bg-sky-400/30 blur-3xl" aria-hidden />
+          <div className="pointer-events-none intro-beam absolute -right-6 bottom-4 h-20 w-20 rounded-full bg-amber-400/25 blur-3xl" aria-hidden />
+
+          <div className="relative flex h-full items-center justify-center">
+            <Image
+              src="/12.svg"
+              alt="Family reviewing handyman options"
+              fill
+              priority
+              className="intro-frame object-contain"
+            />
+            <Image
+              src="/13.svg"
+              alt="Home exterior with handyman tools"
+              fill
+              priority
+              className="intro-frame delay object-contain"
+            />
+          </div>
+
+          <div className="pointer-events-none absolute inset-x-4 bottom-4 rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-slate-100 backdrop-blur">
+            <div className="flex items-center gap-2">
+              <span className="size-2 rounded-full bg-emerald-400" aria-hidden />
+              <span className="font-semibold">Runs for five seconds</span>
+              <span className="text-slate-300">then stays out of the way.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const services = [
     "General Repairs",
@@ -103,6 +185,8 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.12),_transparent_35%),radial-gradient(circle_at_30%_40%,_rgba(239,68,68,0.12),_transparent_35%)]" />
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-20 px-6 pb-24 pt-16 sm:px-8 lg:px-10">
+        <AnimatedIntro />
+
         <section className="min-h-screen flex flex-col items-center justify-center gap-8 p-8">
           <h1 className="text-3xl">Service Menu</h1>
           <div className="grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
