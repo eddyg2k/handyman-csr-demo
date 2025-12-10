@@ -6,43 +6,43 @@ import { useEffect, useState } from "react";
 
 const highlights = [
   {
-    title: "Real-time lead radar",
+    title: "Instant job alerts",
     description:
-      "Keep every homeowner request visible with a live stream of prioritized leads, notes, and quick actions.",
-    pill: "Live dashboard",
+      "See new repair requests the moment they come in so we can schedule your visit without delay.",
+    pill: "Live updates",
   },
   {
-    title: "One-scroll storytelling",
+    title: "Project notes that travel",
     description:
-      "Drift through the narrative instead of paging around. Content slides into view as you move down the hero.",
-    pill: "Scrolling reveals",
+      "Photos, room measurements, and materials stay attached to your request from call to cleanup.",
+    pill: "Detailed briefs",
   },
   {
-    title: "Field-to-office clarity",
+    title: "Neighbors-first scheduling",
     description:
-      "Stay aligned with techs in the field using tidy summaries, checklists, and tidy next steps.",
-    pill: "Operations ready",
+      "We prioritize nearby jobs to arrive on time and finish when we promised.",
+    pill: "On-time routes",
   },
 ];
 
 const storyMoments = [
   {
     label: "01",
-    title: "See today at a glance",
-    text: "A fixed hero keeps your anchors close while cards glide upward as you scroll.",
-    metric: "12 new leads",
+    title: "Start with a quick call",
+    text: "Tell us what needs fixing and share a couple of photos; we map out the visit right away.",
+    metric: "15 min response",
   },
   {
     label: "02",
-    title: "Tap a lead, open the story",
-    text: "Notes, photos, and schedules pop into focus so you can respond without hunting for context.",
-    metric: "3 urgent callbacks",
+    title: "See your plan before we arrive",
+    text: "We send the checklist, materials, and estimated time so you know exactly what will happen.",
+    metric: "Plan confirmed",
   },
   {
     label: "03",
-    title: "Hand off with confidence",
-    text: "Send technicians crystal-clear work orders with timelines and customer expectations baked in.",
-    metric: "7 jobs routed",
+    title: "Leave it cleaner than we found it",
+    text: "From drywall dust to yard debris, we tidy up and walk through the finished work with you.",
+    metric: "5-star follow-ups",
   },
 ];
 
@@ -52,14 +52,14 @@ const craftsmanshipShots = [
     alt: "Handyman assembling a tool kit",
     badge: "Tool prep",
     title: "Arrive ready",
-    description: "Fresh blades, charged batteries, and tidy totes keep CSRs confident when dispatching calls.",
+    description: "Fresh blades, charged batteries, and tidy totes mean we start repairs the moment we step inside.",
   },
   {
     src: "/handyman-crew.svg",
     alt: "Handyman crew reviewing a work order",
     badge: "On-site clarity",
     title: "Align the crew",
-    description: "Photo-rich briefs make it obvious who’s doing what, reducing back-and-forth while on the job.",
+    description: "Photo-rich briefs keep every tech on the same page so your project moves smoothly from start to finish.",
   },
 ];
 
@@ -135,11 +135,11 @@ export default function Experience() {
                 />
               </div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-100">
-                Experience the service flow
+                Southlake home repairs
               </p>
             </div>
             <div className="rounded-full border border-white/15 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-sky-100">
-              Consistent intro styling
+              Same-day and scheduled visits
             </div>
           </div>
 
@@ -147,26 +147,26 @@ export default function Experience() {
             <div className="space-y-6">
               <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-sky-200 ring-1 ring-white/10">
                 <span className="size-2 rounded-full bg-emerald-400" aria-hidden />
-                Fixed hero · Scroll reveals
+                Licensed · Insured · Local
               </p>
               <h1 className="text-4xl font-extrabold leading-tight text-sky-50 sm:text-5xl lg:text-6xl">
-                YOUR HANDYMAN EXPERIENCE, AS REFINED AS THE INTRO
+                FULL-SERVICE HANDYMAN CARE FROM FIRST CALL TO FINAL WALKTHROUGH
               </h1>
               <p className="max-w-2xl text-lg text-slate-100/90">
-                A grounded hero with cinematic overlays keeps the journey cohesive from the first hello to the service deep dive. Every card echoes the welcoming polish of the intro page.
+                Friendly faces, tidy workmanship, and clear updates at every step. We handle repairs, touch-ups, and upgrades with the same pride we take in our own homes.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Link
                   className="rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5 hover:shadow-sky-400/40"
                   href="/dashboard"
                 >
-                  Jump into the dashboard
+                  View your project dashboard
                 </Link>
                 <a
                   className="rounded-full border border-white/25 px-7 py-3 text-sm font-semibold text-slate-100 transition hover:-translate-y-0.5 hover:border-white/50"
                   href="#scroll-story"
                 >
-                  See how it flows
+                  Explore our process
                 </a>
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function Experience() {
                 <div className="mb-4 flex items-center justify-between text-sm text-slate-200">
                   <span className="font-semibold">Today</span>
                   <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-200">
-                    Live updates
+                    Service timeline
                   </span>
                 </div>
                 <div className="space-y-4">
@@ -200,8 +200,8 @@ export default function Experience() {
                 </div>
                 <div className="mt-6 flex items-center justify-between rounded-xl bg-gradient-to-r from-slate-800/80 to-slate-900/80 px-4 py-3 text-sm text-slate-200">
                   <div>
-                    <p className="text-xs uppercase tracking-wide text-sky-200">Momentum</p>
-                    <p className="text-lg font-semibold text-white">Stay anchored while the story unfolds</p>
+                    <p className="text-xs uppercase tracking-wide text-sky-200">From booking to cleanup</p>
+                    <p className="text-lg font-semibold text-white">Track every step while we handle the tools</p>
                   </div>
                   <div className="rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white">Scroll ↓</div>
                 </div>
@@ -213,14 +213,14 @@ export default function Experience() {
         <section className="rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 backdrop-blur">
           <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Curated service menu</p>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">Pick a service, stay in the story</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Home repair menu</p>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">Choose the work, we’ll handle the rest</h2>
               <p className="mt-3 max-w-3xl text-lg text-slate-200">
-                The same friendly typography and soft glass effect from the intro keeps this selector feeling familiar.
+                Select the repairs you need and we’ll prepare materials, schedule a visit, and keep you updated until it is done.
               </p>
             </div>
             <div className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-100">
-              Quick add · Modal details
+              Quick add · Friendly follow-up
             </div>
           </div>
 
@@ -239,8 +239,8 @@ export default function Experience() {
           {selectedService && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
               <div className="w-full max-w-md space-y-4 rounded-2xl border border-white/10 bg-white/95 p-6 text-center text-slate-900 shadow-2xl shadow-black/30">
-                <h2 className="text-xl font-semibold">Add Details for {selectedService}</h2>
-                <p className="text-sm text-slate-600">Match the intro’s warmth by sharing a quick note before dispatch.</p>
+                <h2 className="text-xl font-semibold">Add details for {selectedService}</h2>
+                <p className="text-sm text-slate-600">Share the room, timeframe, or photo so we can bring the right tools and parts.</p>
                 <button
                   className="w-full rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
                   onClick={closeModal}
@@ -257,11 +257,10 @@ export default function Experience() {
           className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
         >
           <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Scroll to reveal</p>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">Content that arrives as you move</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">How we work</p>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">Clear steps from first hello to finished job</h2>
             <p className="text-lg text-slate-300">
-              New sections glide upward as you drift down the page—no jarring jumps or page reloads. It keeps prospects focused
-              on the narrative while showing CSR teams exactly what matters.
+              We keep communication open and expectations clear, sharing updates as the visit moves from inspection to repair to final cleanup.
             </p>
           </div>
 
@@ -269,7 +268,7 @@ export default function Experience() {
             <div className="flex items-center justify-between gap-4">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-100">
                 <span className="size-2 rounded-full bg-emerald-400" aria-hidden />
-                Scroll reveals
+                Service steps
               </div>
               <div className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-200">Live</div>
             </div>
@@ -297,15 +296,14 @@ export default function Experience() {
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Handyman visuals</p>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">Ground the story with real craft</h2>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">See the crew that treats your home like their own</h2>
               <p className="mt-3 max-w-3xl text-lg text-slate-300">
-                Add visual proof that your team is organized, prepared, and communicating clearly. These shots pair with the
-                scrolling copy to show homeowners the calm, capable crew behind the phone call.
+                From prepping tools to reviewing your work order, every step is handled with care so you can relax knowing the right fixes are on the way.
               </p>
             </div>
             <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-semibold text-slate-100 ring-1 ring-white/10">
               <span className="size-2 rounded-full bg-emerald-400" aria-hidden />
-              Updated with fresh handyman scenes
+              Updated with recent projects
             </div>
           </div>
 
@@ -341,24 +339,23 @@ export default function Experience() {
         <section className="reveal rounded-3xl border border-white/10 bg-gradient-to-r from-slate-900/80 via-slate-800/60 to-slate-900/80 p-10 shadow-2xl shadow-black/30">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">For CSRs and dispatch</p>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">Landing page vibes, dashboard focus</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">For homeowners and property managers</p>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">Trusted handyman crew, transparent timelines</h2>
               <p className="text-lg text-slate-200">
-                Give visitors a cinematic first impression while keeping your operations view close by. The hero acts like a
-                command center; the scrolled content fills in the story without stealing attention.
+                Get a warm welcome, clear pricing, and progress you can follow. We keep checklists close so nothing is missed and every visit ends with a walkthrough.
               </p>
               <ul className="space-y-3 text-slate-200">
                 <li className="flex items-start gap-3">
                   <span className="mt-1 size-2 rounded-full bg-emerald-400" aria-hidden />
-                  Smooth fade-and-rise motion tied to scroll position.
+                  Consistent crew communication from booking to checkout.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1 size-2 rounded-full bg-sky-400" aria-hidden />
-                  Fixed hero card that keeps CTAs visible.
+                  Service reminders and ETAs sent before we arrive.
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1 size-2 rounded-full bg-amber-400" aria-hidden />
-                  Clean Tailwind styling—no extra libraries needed.
+                  Respectful pros who clean up and double-check the work.
                 </li>
               </ul>
             </div>
@@ -366,11 +363,11 @@ export default function Experience() {
               <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-rose-500/10" aria-hidden />
               <div className="relative space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-white">Scroll reveal timeline</h3>
+                  <h3 className="text-lg font-semibold text-white">Service milestones</h3>
                   <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-100">Live</span>
                 </div>
                 <div className="space-y-3">
-                  {["Hero anchor", "Reveal cards", "CTA steady"].map((item, index) => (
+                  {["Confirm appointment", "Arrive prepared", "Review and wrap up"].map((item, index) => (
                     <div key={item} className="flex items-center gap-3">
                       <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-slate-900/80">
                         <span className="absolute inset-0 bg-white/5" aria-hidden />
@@ -378,14 +375,13 @@ export default function Experience() {
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-white">{item}</p>
-                        <p className="text-xs text-slate-300">Synced to your scrolling rhythm.</p>
+                        <p className="text-xs text-slate-300">Exactly what to expect at each phase.</p>
                       </div>
                     </div>
                   ))}
                 </div>
                 <div className="mt-5 rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200">
-                  Keep the hero fixed visually while narrative blocks animate into place. Visitors stay oriented; the story keeps
-                  flowing.
+                  Follow each milestone from greeting to goodbye. We keep you oriented while the team gets the work done.
                 </div>
               </div>
             </div>
@@ -394,23 +390,22 @@ export default function Experience() {
 
         <section className="reveal space-y-6 rounded-3xl border border-white/10 bg-slate-900/70 p-10 text-center shadow-lg shadow-black/30">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Ready to go</p>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">Launch the dashboard-powered landing story</h2>
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">Book your handyman visit today</h2>
           <p className="mx-auto max-w-3xl text-lg text-slate-300">
-            Keep your hero anchored, let the details appear as prospects explore, and give CSRs instant access to the dashboard
-            when they are ready to act.
+            Tell us what you need fixed, see your timeline, and enjoy a clean, finished result with updates along the way.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               className="rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5 hover:shadow-sky-500/40"
               href="/dashboard"
             >
-              Open the CSR dashboard
+              Open your project dashboard
             </Link>
             <a
               className="rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-slate-100 transition hover:-translate-y-0.5 hover:border-white/40"
               href="#"
             >
-              Share with your team
+              Share with your household
             </a>
           </div>
         </section>
