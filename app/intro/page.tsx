@@ -10,7 +10,7 @@ const floatingBadges = [
   { label: "Craftsman Verified", position: "left-12 bottom-12" },
 ];
 
-export default function Landing() {
+export default function Intro() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
       <div className="absolute inset-0">
@@ -82,13 +82,13 @@ export default function Landing() {
             href="/experience"
             className="rounded-full bg-brand-blue px-8 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5 hover:shadow-sky-400/40"
           >
-            Continue to the site
+            Enter the experience
           </Link>
           <Link
             href="/dashboard"
             className="rounded-full border border-white/25 px-7 py-3 text-sm font-semibold text-slate-100 transition hover:-translate-y-0.5 hover:border-white/50"
           >
-            Jump to the dashboard
+            View dashboard
           </Link>
         </motion.div>
 
