@@ -7,4 +7,11 @@ export interface Lead {
   status: LeadStatus;
   city: string;
   description: string;
+  service?: string;
+  serviceDetail?: string;
+  scheduleWindow?: string;
+  notificationEmail?: string;
+  documents?: string[];
+  communications?: string[];
+  activeRequests?: string[];
 }
