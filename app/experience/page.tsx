@@ -265,7 +265,9 @@ export default function Experience() {
             </section>
 
             <section
-              ref={(el) => (sectionRefs[0].current = el)}
+              ref={(el: HTMLDivElement | null) => {
+                sectionRefs[0].current = el;
+              }}
               className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/25 backdrop-blur"
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
@@ -355,7 +357,9 @@ export default function Experience() {
 
             {visibleSections >= 2 && (
               <section
-                ref={(el) => (sectionRefs[1].current = el)}
+                ref={(el: HTMLDivElement | null) => {
+                  sectionRefs[1].current = el;
+                }}
                 className="reveal rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-xl shadow-black/30"
               >
                 <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -395,7 +399,9 @@ export default function Experience() {
 
             {visibleSections >= 3 && (
               <section
-                ref={(el) => (sectionRefs[2].current = el)}
+                ref={(el: HTMLDivElement | null) => {
+                  sectionRefs[2].current = el;
+                }}
                 className="reveal grid gap-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
               >
               <div className="space-y-4">
@@ -443,7 +449,9 @@ export default function Experience() {
 
             {visibleSections >= 4 && (
               <section
-                ref={(el) => (sectionRefs[3].current = el)}
+                ref={(el: HTMLDivElement | null) => {
+                  sectionRefs[3].current = el;
+                }}
                 className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30"
               >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -505,7 +513,9 @@ export default function Experience() {
 
             {visibleSections >= 5 && (
               <section
-                ref={(el) => (sectionRefs[4].current = el)}
+                ref={(el: HTMLDivElement | null) => {
+                  sectionRefs[4].current = el;
+                }}
                 className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30"
               >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -575,7 +585,9 @@ export default function Experience() {
 
             {visibleSections >= 6 && (
               <section
-                ref={(el) => (sectionRefs[5].current = el)}
+                ref={(el: HTMLDivElement | null) => {
+                  sectionRefs[5].current = el;
+                }}
                 className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30"
               >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -684,7 +696,9 @@ export default function Experience() {
 
             {visibleSections >= 7 && (
               <section
-                ref={(el) => (sectionRefs[6].current = el)}
+                ref={(el: HTMLDivElement | null) => {
+                  sectionRefs[6].current = el;
+                }}
                 className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-8 text-center shadow-xl shadow-black/30"
               >
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Ready when you are</p>
