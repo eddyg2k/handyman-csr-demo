@@ -184,7 +184,7 @@ export default function Experience() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.16),transparent_38%),radial-gradient(circle_at_80%_30%,rgba(248,113,113,0.14),transparent_42%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-12 lg:py-16 lg:pr-[360px]">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-12 lg:py-16">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="space-y-10">
             <section className="reveal rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 backdrop-blur">
