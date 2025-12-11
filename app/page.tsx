@@ -38,18 +38,18 @@ export default function Landing() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="relative h-12 w-12 overflow-hidden rounded-full bg-white/90 p-1">
+          <div className="relative h-16 w-16 overflow-hidden rounded-full bg-white/90 p-1.5">
             <Image
               src="/handyman logo no background.png"
               alt="Handyman logo"
               fill
-              sizes="48px"
+              sizes="64px"
               className="object-contain"
               priority
             />
           </div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-100">
-            Welcome to your #1 trusted team
+          <p className="text-base font-semibold uppercase tracking-[0.2em] text-slate-100">
+            Handyman of Southlake
           </p>
         </motion.div>
 
