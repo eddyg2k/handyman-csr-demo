@@ -24,6 +24,22 @@ export default function LeadCard({ lead }: LeadCardProps) {
       <p className="text-gray-400">{lead.phone}</p>
       <p className="text-sm text-gray-500">{lead.city}</p>
       <p className="mt-2 text-gray-300">{lead.description}</p>
+      <div className="mt-3 space-y-1 text-sm text-gray-200">
+        {lead.service && (
+          <p>
+            <span className="font-semibold text-brand-blue">Service:</span> {lead.service}
+            {lead.serviceDetail ? ` · ${lead.serviceDetail}` : ""}
+          </p>
+        )}
+        {lead.scheduleWindow && (
+          <p>
+            <span className="font-semibold text-brand-blue">Schedule:</span> {lead.scheduleWindow}
+          </p>
+        )}
+        {lead.notificationEmail && (
+          <p className="text-xs text-slate-300">Notifications: {lead.notificationEmail}</p>
+        )}
+      </div>
     </div>
   );
 }
