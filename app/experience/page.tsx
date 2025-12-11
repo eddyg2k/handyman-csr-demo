@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Service = {
   name: string;
@@ -18,6 +18,14 @@ type TrackingState = {
   name?: string;
   email?: string;
   phone?: string;
+};
+
+type StepId = "service" | "crew" | "address" | "about" | "contact";
+
+type ActivityEntry = {
+  message: string;
+  timestamp: Date;
+  step?: string;
 };
 
 const serviceMenu: Service[] = [
@@ -75,14 +83,48 @@ export default function Experience() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [serviceOption, setServiceOption] = useState<string>("");
   const [tracking, setTracking] = useState<TrackingState>({});
-  const [activity, setActivity] = useState<string[]>([]);
+  const [activity, setActivity] = useState<ActivityEntry[]>([]);
   const [addressInput, setAddressInput] = useState("");
   const [filteredAddresses, setFilteredAddresses] = useState(addressSuggestions);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [chatOpen, setChatOpen] = useState(false);
+  const [completedSteps, setCompletedSteps] = useState<Record<string, boolean>>({});
+  const [currentStep, setCurrentStep] = useState(0);
 
-  const appendActivity = (entry: string) => {
-    setActivity((prev) => [...prev, entry]);
+  const serviceRef = useRef<HTMLElement | null>(null);
+  const crewRef = useRef<HTMLElement | null>(null);
+  const addressRef = useRef<HTMLElement | null>(null);
+  const aboutRef = useRef<HTMLElement | null>(null);
+  const milestoneRef = useRef<HTMLElement | null>(null);
+  const contactRef = useRef<HTMLElement | null>(null);
+  const finishRef = useRef<HTMLElement | null>(null);
+
+  const stepCompletion = useMemo<Record<StepId, boolean>>(
+    () => ({
+      service: Boolean(tracking.service),
+      crew: Boolean(tracking.crewFocus),
+      address: Boolean(tracking.address),
+      about: Boolean(tracking.name),
+      contact: Boolean(tracking.email && tracking.phone),
+    }),
+    [tracking]
+  );
+
+  const sectionRefs = useMemo(
+    () => ({
+      service: serviceRef,
+      crew: crewRef,
+      address: addressRef,
+      about: aboutRef,
+      milestones: milestoneRef,
+      contact: contactRef,
+      finish: finishRef,
+    }),
+    [aboutRef, addressRef, contactRef, crewRef, finishRef, milestoneRef, serviceRef]
+  );
+
+  const appendActivity = (entry: string, step?: string) => {
+    setActivity((prev) => [...prev, { message: entry, step, timestamp: new Date() }]);
   };
 
   const closeModal = () => {
@@ -94,13 +136,13 @@ export default function Experience() {
     if (!selectedService) return;
     const detail = serviceOption || selectedService.options[0];
     setTracking((prev) => ({ ...prev, service: selectedService.name, serviceDetail: detail }));
-    appendActivity(`Service added: ${selectedService.name} (${detail}).`);
+    appendActivity(`Service added: ${selectedService.name} (${detail}).`, "Service menu");
     closeModal();
   };
 
   const handleCrewSelect = (crewFocus: string) => {
     setTracking((prev) => ({ ...prev, crewFocus }));
-    appendActivity(`Crew preference saved: ${crewFocus}.`);
+    appendActivity(`Crew preference saved: ${crewFocus}.`, "Meet the crew");
   };
 
   const handleAddressInput = (value: string) => {
@@ -114,20 +156,61 @@ export default function Experience() {
   const handleAddressCommit = (value: string) => {
     setTracking((prev) => ({ ...prev, address: value }));
     setAddressInput(value);
-    appendActivity(`Address matched: ${value}.`);
+    appendActivity(`Address matched: ${value}.`, "Service address");
   };
 
   const handleNameUpdate = (value: string) => {
     setTracking((prev) => ({ ...prev, name: value }));
     if (value) {
-      appendActivity(`Contact name captured: ${value}.`);
+      appendActivity(`Contact name captured: ${value}.`, "About us");
     }
   };
 
   const handleContactSave = (email: string, phone: string) => {
     setTracking((prev) => ({ ...prev, email, phone }));
-    appendActivity("Contact details saved for scheduling.");
+    appendActivity("Contact details saved for scheduling.", "Final contact");
   };
+
+  const stepOrder = useMemo(
+    () => [
+      { id: "service", label: "Service" },
+      { id: "crew", label: "Crew" },
+      { id: "address", label: "Address" },
+      { id: "about", label: "Name" },
+      { id: "contact", label: "Contact" },
+    ],
+    []
+  );
+
+  const stepLookup = useMemo(
+    () => stepOrder.reduce<Record<StepId, number>>((acc, step, index) => ({ ...acc, [step.id as StepId]: index }), {
+      service: 0,
+      crew: 1,
+      address: 2,
+      about: 3,
+      contact: 4,
+    }),
+    [stepOrder]
+  );
+
+  useEffect(() => {
+    const firstIncompleteIndex = stepOrder.findIndex((step) => !stepCompletion[step.id as StepId]);
+    setCurrentStep(firstIncompleteIndex === -1 ? stepOrder.length - 1 : firstIncompleteIndex);
+
+    stepOrder.forEach((step, index) => {
+      const justCompleted = stepCompletion[step.id as StepId] && !completedSteps[step.id];
+      if (justCompleted) {
+        setCompletedSteps((prev) => ({ ...prev, [step.id]: true }));
+        const nextStep = stepOrder[index + 1];
+        if (nextStep) {
+          sectionRefs[nextStep.id as keyof typeof sectionRefs].current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }
+    });
+  }, [completedSteps, sectionRefs, stepCompletion, stepOrder]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -149,14 +232,42 @@ export default function Experience() {
   }, []);
 
   const selectionSummary = useMemo(
-    () => [
-      { label: "Service", value: tracking.service ? `${tracking.service} · ${tracking.serviceDetail}` : "Choose from the menu" },
-      { label: "Crew", value: tracking.crewFocus || "Select a crew focus" },
-      { label: "Address", value: tracking.address || "Add your Southlake address" },
-      { label: "Name", value: tracking.name || "Who should we greet?" },
-      { label: "Contact", value: tracking.email || tracking.phone ? `${tracking.email ?? ""} ${tracking.phone ?? ""}`.trim() : "Email + phone" },
-    ],
-    [tracking]
+    () =>
+      stepOrder.map((step) => {
+        const valueMap: Record<StepId, string> = {
+          service: tracking.service ? `${tracking.service} · ${tracking.serviceDetail}` : "Choose from the menu",
+          crew: tracking.crewFocus || "Select a crew focus",
+          address: tracking.address || "Add your Southlake address",
+          about: tracking.name || "Who should we greet?",
+          contact:
+            tracking.email || tracking.phone
+              ? `${tracking.email ?? ""} ${tracking.phone ?? ""}`.trim()
+              : "Email + phone",
+        };
+
+        const statusLabel = stepCompletion[step.id as StepId]
+          ? "Saved"
+          : stepLookup[step.id as StepId] === currentStep
+            ? "In progress"
+            : "Locked";
+
+        return { label: step.label, value: valueMap[step.id as StepId], status: statusLabel };
+      }),
+    [currentStep, stepCompletion, stepLookup, stepOrder, tracking.email, tracking.phone, tracking.service, tracking.serviceDetail, tracking.address, tracking.crewFocus, tracking.name]
+  );
+
+  const isLocked = (id: StepId) => stepLookup[id] > currentStep;
+  const progressValue = Math.round(
+    (Object.values(stepCompletion).filter(Boolean).length / stepOrder.length) * 100
+  );
+
+  const SectionLock = ({ message }: { message: string }) => (
+    <div className="absolute inset-0 z-10 grid place-items-center rounded-3xl bg-slate-950/75 backdrop-blur-sm">
+      <div className="flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-black/30">
+        <span className="size-2 rounded-full bg-amber-400" aria-hidden />
+        {message}
+      </div>
+    </div>
   );
 
   const mapSrc =
@@ -208,7 +319,11 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/25 backdrop-blur">
+            <section
+              ref={sectionRefs.service}
+              className="relative reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/25 backdrop-blur"
+            >
+              {isLocked("service") && <SectionLock message="Start the planner to unlock" />}
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">1 · Service menu</p>
@@ -294,7 +409,13 @@ export default function Experience() {
               )}
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-xl shadow-black/30">
+            <section
+              ref={sectionRefs.crew}
+              className={`relative reveal rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-xl shadow-black/30 ${
+                isLocked("crew") ? "opacity-60" : ""
+              }`}
+            >
+              {isLocked("crew") && <SectionLock message="Unlock after saving your service" />}
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">2 · Meet the crew</p>
@@ -329,7 +450,13 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal grid gap-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <section
+              ref={sectionRefs.address}
+              className={`relative reveal grid gap-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center ${
+                isLocked("address") ? "opacity-60" : ""
+              }`}
+            >
+              {isLocked("address") && <SectionLock message="Finish crew selection to unlock" />}
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">3 · Service address</p>
                 <h2 className="text-3xl font-bold text-white sm:text-4xl">Center on Southlake and confirm your address</h2>
@@ -372,7 +499,13 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30">
+            <section
+              ref={sectionRefs.about}
+              className={`relative reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30 ${
+                isLocked("about") ? "opacity-60" : ""
+              }`}
+            >
+              {isLocked("about") && <SectionLock message="Add an address to unlock" />}
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">4 · About us</p>
@@ -429,7 +562,10 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30">
+            <section
+              ref={sectionRefs.milestones}
+              className="relative reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30"
+            >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">5 · Service milestones</p>
@@ -463,7 +599,13 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30">
+            <section
+              ref={sectionRefs.contact}
+              className={`relative reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30 ${
+                isLocked("contact") ? "opacity-60" : ""
+              }`}
+            >
+              {isLocked("contact") && <SectionLock message="Share your name to unlock" />}
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">6 · Final contact</p>
@@ -520,7 +662,7 @@ export default function Experience() {
                     className="w-full rounded-full border border-emerald-400/60 bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
                     onClick={() => {
                       setChatOpen(true);
-                      appendActivity("Live widget opened to schedule an estimate.");
+                      appendActivity("Live widget opened to schedule an estimate.", "Live chat");
                     }}
                   >
                     Launch live chat
@@ -535,7 +677,10 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-8 text-center shadow-xl shadow-black/30">
+            <section
+              ref={sectionRefs.finish}
+              className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-8 text-center shadow-xl shadow-black/30"
+            >
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Ready when you are</p>
               <h2 className="text-3xl font-bold text-white sm:text-4xl">Finish the form and move to your dashboard</h2>
               <p className="mx-auto max-w-3xl text-lg text-slate-200">
@@ -562,12 +707,34 @@ export default function Experience() {
           <aside className="sticky top-10 hidden h-fit space-y-4 rounded-3xl border border-white/15 bg-slate-950/80 p-6 shadow-xl shadow-black/30 backdrop-blur lg:block">
             <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-slate-200">
               <span>Tracking</span>
-              <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-[11px] text-emerald-100">Live</span>
+              <div className="flex items-center gap-2 text-[11px] font-semibold">
+                <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-emerald-100">Live</span>
+                <span className="rounded-full bg-white/10 px-3 py-1 text-white">{progressValue}%</span>
+              </div>
+            </div>
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+              <div
+                style={{ width: `${progressValue}%` }}
+                className="h-full rounded-full bg-brand-blue transition-[width] duration-500"
+              />
             </div>
             <div className="space-y-4">
               {selectionSummary.map((item) => (
                 <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{item.label}</p>
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{item.label}</p>
+                    <span
+                      className={`rounded-full px-3 py-1 text-[11px] font-semibold ${
+                        item.status === "Saved"
+                          ? "bg-emerald-400/20 text-emerald-100"
+                          : item.status === "In progress"
+                            ? "bg-amber-400/20 text-amber-100"
+                            : "bg-white/10 text-slate-100"
+                      }`}
+                    >
+                      {item.status}
+                    </span>
+                  </div>
                   <p className="mt-1 text-sm text-white">{item.value}</p>
                 </div>
               ))}
@@ -577,17 +744,62 @@ export default function Experience() {
               {activity.length === 0 ? (
                 <p className="mt-2 text-slate-300">Your choices will appear here as you move through the sections.</p>
               ) : (
-                <ul className="mt-2 space-y-2 text-slate-200">
+                <ul className="mt-2 space-y-3 text-slate-200">
                   {activity.map((entry, index) => (
-                    <li key={`${entry}-${index}`} className="flex items-start gap-2">
+                    <li
+                      key={`${entry.timestamp.toISOString()}-${index}`}
+                      className="flex items-start gap-3 border-l border-white/10 pl-3"
+                    >
                       <span className="mt-1 size-1.5 rounded-full bg-emerald-400" aria-hidden />
-                      <span>{entry}</span>
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2 text-[12px] uppercase tracking-[0.16em] text-slate-300">
+                          <span>{entry.step ?? "Tracker"}</span>
+                          <span className="text-sky-200">
+                            {entry.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                          </span>
+                        </div>
+                        <p className="text-sm text-white/90">{entry.message}</p>
+                      </div>
                     </li>
                   ))}
                 </ul>
               )}
             </div>
           </aside>
+        </div>
+
+        <div className="fixed bottom-4 left-1/2 z-30 w-[calc(100%-2rem)] max-w-3xl -translate-x-1/2 rounded-2xl border border-white/10 bg-slate-950/85 p-4 shadow-2xl shadow-black/40 backdrop-blur lg:hidden">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-sky-200">Sticky tracker</p>
+              <p className="text-sm font-semibold text-white">
+                {selectionSummary[currentStep]?.label ?? "Service"} step
+              </p>
+            </div>
+            <div className="text-right">
+              <span
+                className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold ${
+                  selectionSummary[currentStep]?.status === "Saved"
+                    ? "bg-emerald-400/20 text-emerald-100"
+                    : selectionSummary[currentStep]?.status === "In progress"
+                      ? "bg-amber-400/20 text-amber-100"
+                      : "bg-white/10 text-slate-100"
+                }`}
+              >
+                {selectionSummary[currentStep]?.status ?? "Locked"}
+              </span>
+              <p className="mt-1 text-xs text-slate-200">{progressValue}% complete</p>
+            </div>
+          </div>
+          <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white/10">
+            <div
+              style={{ width: `${progressValue}%` }}
+              className="h-full rounded-full bg-brand-blue transition-[width] duration-500"
+            />
+          </div>
+          <p className="mt-2 text-xs text-slate-200">
+            {selectionSummary[currentStep]?.value ?? "Progress updates as you fill the planner."}
+          </p>
         </div>
       </div>
     </main>
