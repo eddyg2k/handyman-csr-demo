@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useState } from "react";
+import { LazyMap } from "@/components/LazyMap";
 
 type Service = {
   name: string;
@@ -79,95 +80,106 @@ export default function Experience() {
   const [tracking, setTracking] = useState<TrackingState>({});
   const [activity, setActivity] = useState<string[]>([]);
   const [addressInput, setAddressInput] = useState("");
-  const [filteredAddresses, setFilteredAddresses] = useState(addressSuggestions);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [chatOpen, setChatOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState(1);
   const sectionRefs = useMemo(() => Array.from({ length: 7 }, () => ({ current: null as HTMLDivElement | null })), []);
+  const deferredAddressInput = useDeferredValue(addressInput);
 
-  const appendActivity = (entry: string) => {
+  const appendActivity = useCallback((entry: string) => {
     setActivity((prev) => [...prev, entry]);
-  };
+  }, []);
 
-  const scrollToSection = (index: number) => {
+  const scrollToSection = useCallback((index: number) => {
     const target = sectionRefs[index]?.current;
     if (target) {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  };
+  }, [sectionRefs]);
 
-  const unlockNextSection = (nextVisibleCount: number) => {
-    setVisibleSections((prev) => {
-      const updated = Math.max(prev, nextVisibleCount);
-      if (updated !== prev) {
-        setTimeout(() => scrollToSection(updated - 1), 200);
-      }
-      return updated;
-    });
-  };
+  const unlockNextSection = useCallback(
+    (nextVisibleCount: number) => {
+      setVisibleSections((prev) => {
+        const updated = Math.max(prev, nextVisibleCount);
+        if (updated !== prev) {
+          setTimeout(() => scrollToSection(updated - 1), 200);
+        }
+        return updated;
+      });
+    },
+    [scrollToSection]
+  );
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setSelectedService(null);
     setServiceOption("");
-  };
+  }, []);
 
-  const handleServiceConfirm = () => {
+  const handleServiceConfirm = useCallback(() => {
     if (!selectedService) return;
     const detail = serviceOption || selectedService.options[0];
     setTracking((prev) => ({ ...prev, service: selectedService.name, serviceDetail: detail }));
     appendActivity(`Service added: ${selectedService.name} (${detail}).`);
     unlockNextSection(2);
     closeModal();
-  };
+  }, [appendActivity, closeModal, selectedService, serviceOption, unlockNextSection]);
 
-  const handleCrewSelect = (crewFocus: string) => {
-    setTracking((prev) => ({ ...prev, crewFocus }));
-    appendActivity(`Crew preference saved: ${crewFocus}.`);
-    unlockNextSection(3);
-  };
+  const handleCrewSelect = useCallback(
+    (crewFocus: string) => {
+      setTracking((prev) => ({ ...prev, crewFocus }));
+      appendActivity(`Crew preference saved: ${crewFocus}.`);
+      unlockNextSection(3);
+    },
+    [appendActivity, unlockNextSection]
+  );
 
-  const handleAddressInput = (value: string) => {
+  const handleAddressInput = useCallback((value: string) => {
     setAddressInput(value);
-    const matches = addressSuggestions.filter((address) =>
-      address.toLowerCase().includes(value.toLowerCase())
-    );
-    setFilteredAddresses(matches.length ? matches : addressSuggestions);
-  };
+  }, []);
 
-  const handleAddressCommit = (value: string) => {
-    setTracking((prev) => ({ ...prev, address: value }));
-    setAddressInput(value);
-    appendActivity(`Address matched: ${value}.`);
-    unlockNextSection(4);
-  };
+  const handleAddressCommit = useCallback(
+    (value: string) => {
+      setTracking((prev) => ({ ...prev, address: value }));
+      setAddressInput(value);
+      appendActivity(`Address matched: ${value}.`);
+      unlockNextSection(4);
+    },
+    [appendActivity, unlockNextSection]
+  );
 
-  const handleNameUpdate = (value: string) => {
-    setTracking((prev) => ({ ...prev, name: value }));
-    if (value) {
-      appendActivity(`Contact name captured: ${value}.`);
-      unlockNextSection(5);
-    }
-  };
+  const handleNameUpdate = useCallback(
+    (value: string) => {
+      setTracking((prev) => ({ ...prev, name: value }));
+      if (value) {
+        appendActivity(`Contact name captured: ${value}.`);
+        unlockNextSection(5);
+      }
+    },
+    [appendActivity, unlockNextSection]
+  );
 
-  const handleContactSave = (email: string, phone: string) => {
+  const handleContactSave = useCallback((email: string, phone: string) => {
     setTracking((prev) => ({ ...prev, email, phone }));
     appendActivity("Contact details saved for scheduling.");
-  };
+  }, [appendActivity]);
 
-  const handleNotificationEmail = (email: string) => {
-    setTracking((prev) => ({ ...prev, notificationEmail: email, email: prev.email ?? email }));
-    appendActivity("Notification email added for estimates and invoices.");
-    unlockNextSection(6);
-  };
+  const handleNotificationEmail = useCallback(
+    (email: string) => {
+      setTracking((prev) => ({ ...prev, notificationEmail: email, email: prev.email ?? email }));
+      appendActivity("Notification email added for estimates and invoices.");
+      unlockNextSection(6);
+    },
+    [appendActivity, unlockNextSection]
+  );
 
-  const handleWidgetLaunch = () => {
+  const handleWidgetLaunch = useCallback(() => {
     if (!tracking.phone || !tracking.contactPreference) return;
     setChatOpen(true);
     appendActivity(
       `Scheduling widget triggered via ${tracking.contactPreference === "text" ? "text" : "phone"} with ${tracking.phone}.`
     );
     unlockNextSection(7);
-  };
+  }, [appendActivity, tracking.contactPreference, tracking.phone, unlockNextSection]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -179,7 +191,7 @@ export default function Experience() {
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.25, rootMargin: "80px" }
     );
 
     const elements = document.querySelectorAll<HTMLElement>(".reveal");
@@ -215,8 +227,14 @@ export default function Experience() {
     [tracking]
   );
 
-  const mapSrc =
-    "https://www.openstreetmap.org/export/embed.html?bbox=-97.2000%2C32.8800%2C-97.0600%2C33.0100&layer=mapnik&marker=32.9412%2C-97.1342";
+  const mapSrc = "https://www.openstreetmap.org/export/embed.html?bbox=-97.2000%2C32.8800%2C-97.0600%2C33.0100&layer=mapnik&marker=32.9412%2C-97.1342";
+
+  const filteredAddresses = useMemo(() => {
+    const matches = addressSuggestions.filter((address) =>
+      address.toLowerCase().includes(deferredAddressInput.toLowerCase())
+    );
+    return matches.length ? matches : addressSuggestions;
+  }, [deferredAddressInput]);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
@@ -439,7 +457,13 @@ export default function Experience() {
               </div>
 
               <div className="overflow-hidden rounded-2xl border border-white/10 shadow-lg shadow-black/30">
-                <iframe title="Southlake map" src={mapSrc} className="h-[360px] w-full" loading="lazy" />
+                <LazyMap
+                  title="Southlake map"
+                  src={mapSrc}
+                  wrapperClassName="h-[360px] w-full"
+                  frameClassName="h-full w-full"
+                  fallback={<div className="h-full w-full animate-pulse bg-slate-800/70" />}
+                />
                 <div className="bg-slate-900/80 p-4 text-sm text-slate-200">
                   Mapped to Southlake, TX · Adjusting the address recenters the crew route and updates your dashboard.
                 </div>
