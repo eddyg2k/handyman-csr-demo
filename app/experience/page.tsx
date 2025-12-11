@@ -184,7 +184,7 @@ export default function Experience() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.16),transparent_38%),radial-gradient(circle_at_80%_30%,rgba(248,113,113,0.14),transparent_42%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-12 lg:py-16">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-12 lg:py-16 lg:pr-[360px]">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="space-y-10">
             <section className="reveal rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 backdrop-blur">
@@ -559,7 +559,7 @@ export default function Experience() {
             </section>
           </div>
 
-          <aside className="sticky top-10 hidden h-fit space-y-4 rounded-3xl border border-white/15 bg-slate-950/80 p-6 shadow-xl shadow-black/30 backdrop-blur lg:block">
+          <aside className="fixed right-6 top-10 hidden h-fit w-[320px] space-y-4 rounded-3xl border border-white/15 bg-slate-950/80 p-6 shadow-xl shadow-black/30 backdrop-blur lg:block">
             <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-slate-200">
               <span>Tracking</span>
               <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-[11px] text-emerald-100">Live</span>
