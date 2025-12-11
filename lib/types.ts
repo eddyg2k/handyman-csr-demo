@@ -7,4 +7,6 @@ export interface Lead {
   status: LeadStatus;
   city: string;
   description: string;
+  service?: string;
+  scheduledAt?: string;
 }

@@ -8,6 +8,8 @@ export const leads: Lead[] = [
     status: "New",
     city: "Southlake",
     description: "Leaky faucet in kitchen",
+    service: "General Repairs",
+    scheduledAt: "Fri, 3-5 PM",
   },
   {
     id: "2",
@@ -16,6 +18,8 @@ export const leads: Lead[] = [
     status: "In Progress",
     city: "Keller",
     description: "Door frame repair and painting",
+    service: "Carpentry",
+    scheduledAt: "Mon, 10 AM",
   },
   {
     id: "3",
@@ -24,5 +28,7 @@ export const leads: Lead[] = [
     status: "Completed",
     city: "Plano",
     description: "Outdoor light fixture replacement",
+    service: "Outdoor Upkeep",
+    scheduledAt: "Completed",
   },
 ];
