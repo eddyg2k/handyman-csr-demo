@@ -184,10 +184,10 @@ export default function Experience() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.16),transparent_38%),radial-gradient(circle_at_80%_30%,rgba(248,113,113,0.14),transparent_42%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-12 lg:py-16">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="space-y-10">
-            <section className="reveal rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 backdrop-blur">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-10 lg:py-14">
+        <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_288px]">
+          <div className="space-y-9 lg:scale-[0.92] lg:origin-top">
+            <section className="reveal rounded-3xl border border-white/10 bg-white/10 p-7 shadow-xl shadow-black/30 backdrop-blur">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Start here</p>
@@ -208,7 +208,7 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/25 backdrop-blur">
+            <section className="reveal space-y-5 rounded-3xl border border-white/10 bg-white/10 p-7 shadow-xl shadow-black/25 backdrop-blur">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">1 · Service menu</p>
@@ -223,7 +223,7 @@ export default function Experience() {
                 </div>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
                 {serviceMenu.map((service) => (
                   <button
                     key={service.name}
@@ -294,7 +294,7 @@ export default function Experience() {
               )}
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-xl shadow-black/30">
+            <section className="reveal rounded-3xl border border-white/10 bg-slate-950/70 p-7 shadow-xl shadow-black/30">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">2 · Meet the crew</p>
@@ -329,7 +329,7 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal grid gap-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <section className="reveal grid gap-5 rounded-3xl border border-white/10 bg-white/10 p-7 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">3 · Service address</p>
                 <h2 className="text-3xl font-bold text-white sm:text-4xl">Center on Southlake and confirm your address</h2>
@@ -372,7 +372,7 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30">
+            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-7 shadow-xl shadow-black/30">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">4 · About us</p>
@@ -429,7 +429,7 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30">
+            <section className="reveal space-y-5 rounded-3xl border border-white/10 bg-white/10 p-7 shadow-xl shadow-black/30">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">5 · Service milestones</p>
@@ -463,7 +463,7 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30">
+            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-7 shadow-xl shadow-black/30">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">6 · Final contact</p>
@@ -535,7 +535,7 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-8 text-center shadow-xl shadow-black/30">
+            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-7 text-center shadow-xl shadow-black/30">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Ready when you are</p>
               <h2 className="text-3xl font-bold text-white sm:text-4xl">Finish the form and move to your dashboard</h2>
               <p className="mx-auto max-w-3xl text-lg text-slate-200">
@@ -559,20 +559,20 @@ export default function Experience() {
             </section>
           </div>
 
-          <aside className="sticky top-10 hidden h-fit space-y-4 rounded-3xl border border-white/15 bg-slate-950/80 p-6 shadow-xl shadow-black/30 backdrop-blur lg:block">
-            <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-slate-200">
+          <aside className="fixed right-6 top-8 hidden h-fit w-[288px] space-y-3 rounded-3xl border border-white/15 bg-slate-950/80 p-5 shadow-xl shadow-black/30 backdrop-blur lg:block lg:scale-[0.92] lg:origin-top">
+            <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-200">
               <span>Tracking</span>
               <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-[11px] text-emerald-100">Live</span>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {selectionSummary.map((item) => (
-                <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-3.5">
                   <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{item.label}</p>
                   <p className="mt-1 text-sm text-white">{item.value}</p>
                 </div>
               ))}
             </div>
-            <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-4 text-sm text-slate-100">
+            <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-3.5 text-sm text-slate-100">
               <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Activity log</p>
               {activity.length === 0 ? (
                 <p className="mt-2 text-slate-300">Your choices will appear here as you move through the sections.</p>
