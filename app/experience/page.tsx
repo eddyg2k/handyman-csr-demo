@@ -17,7 +17,9 @@ type TrackingState = {
   address?: string;
   name?: string;
   email?: string;
+  notificationEmail?: string;
   phone?: string;
+  contactPreference?: "text" | "phone";
 };
 
 const serviceMenu: Service[] = [
@@ -80,9 +82,28 @@ export default function Experience() {
   const [filteredAddresses, setFilteredAddresses] = useState(addressSuggestions);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [chatOpen, setChatOpen] = useState(false);
+  const [visibleSections, setVisibleSections] = useState(1);
+  const sectionRefs = useMemo(() => Array.from({ length: 7 }, () => ({ current: null as HTMLDivElement | null })), []);
 
   const appendActivity = (entry: string) => {
     setActivity((prev) => [...prev, entry]);
+  };
+
+  const scrollToSection = (index: number) => {
+    const target = sectionRefs[index]?.current;
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const unlockNextSection = (nextVisibleCount: number) => {
+    setVisibleSections((prev) => {
+      const updated = Math.max(prev, nextVisibleCount);
+      if (updated !== prev) {
+        setTimeout(() => scrollToSection(updated - 1), 200);
+      }
+      return updated;
+    });
   };
 
   const closeModal = () => {
@@ -95,12 +116,14 @@ export default function Experience() {
     const detail = serviceOption || selectedService.options[0];
     setTracking((prev) => ({ ...prev, service: selectedService.name, serviceDetail: detail }));
     appendActivity(`Service added: ${selectedService.name} (${detail}).`);
+    unlockNextSection(2);
     closeModal();
   };
 
   const handleCrewSelect = (crewFocus: string) => {
     setTracking((prev) => ({ ...prev, crewFocus }));
     appendActivity(`Crew preference saved: ${crewFocus}.`);
+    unlockNextSection(3);
   };
 
   const handleAddressInput = (value: string) => {
@@ -115,18 +138,35 @@ export default function Experience() {
     setTracking((prev) => ({ ...prev, address: value }));
     setAddressInput(value);
     appendActivity(`Address matched: ${value}.`);
+    unlockNextSection(4);
   };
 
   const handleNameUpdate = (value: string) => {
     setTracking((prev) => ({ ...prev, name: value }));
     if (value) {
       appendActivity(`Contact name captured: ${value}.`);
+      unlockNextSection(5);
     }
   };
 
   const handleContactSave = (email: string, phone: string) => {
     setTracking((prev) => ({ ...prev, email, phone }));
     appendActivity("Contact details saved for scheduling.");
+  };
+
+  const handleNotificationEmail = (email: string) => {
+    setTracking((prev) => ({ ...prev, notificationEmail: email, email: prev.email ?? email }));
+    appendActivity("Notification email added for estimates and invoices.");
+    unlockNextSection(6);
+  };
+
+  const handleWidgetLaunch = () => {
+    if (!tracking.phone || !tracking.contactPreference) return;
+    setChatOpen(true);
+    appendActivity(
+      `Scheduling widget triggered via ${tracking.contactPreference === "text" ? "text" : "phone"} with ${tracking.phone}.`
+    );
+    unlockNextSection(7);
   };
 
   useEffect(() => {
@@ -154,7 +194,23 @@ export default function Experience() {
       { label: "Crew", value: tracking.crewFocus || "Select a crew focus" },
       { label: "Address", value: tracking.address || "Add your Southlake address" },
       { label: "Name", value: tracking.name || "Who should we greet?" },
-      { label: "Contact", value: tracking.email || tracking.phone ? `${tracking.email ?? ""} ${tracking.phone ?? ""}`.trim() : "Email + phone" },
+      {
+        label: "Notifications",
+        value: tracking.notificationEmail
+          ? `Tracking emails to ${tracking.notificationEmail}`
+          : "Add email for estimates + invoices",
+      },
+      {
+        label: "Contact",
+        value:
+          tracking.email || tracking.phone
+            ? `${tracking.email ?? tracking.notificationEmail ?? ""} ${tracking.phone ?? ""}`.trim()
+            : "Email + phone",
+      },
+      {
+        label: "Widget",
+        value: tracking.contactPreference ? `Reach out via ${tracking.contactPreference}` : "Choose chat or call",
+      },
     ],
     [tracking]
   );
@@ -208,7 +264,10 @@ export default function Experience() {
               </div>
             </section>
 
-            <section className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/25 backdrop-blur">
+            <section
+              ref={(el) => (sectionRefs[0].current = el)}
+              className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/25 backdrop-blur"
+            >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">1 · Service menu</p>
@@ -294,10 +353,14 @@ export default function Experience() {
               )}
             </section>
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-xl shadow-black/30">
-              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">2 · Meet the crew</p>
+            {visibleSections >= 2 && (
+              <section
+                ref={(el) => (sectionRefs[1].current = el)}
+                className="reveal rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-xl shadow-black/30"
+              >
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">2 · Meet the crew</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Certified, local, and ready</h2>
                   <p className="text-lg text-slate-300">
                     Preview who is coming to your home. Choose the focus that fits your request and we will pin that crew to your
@@ -328,8 +391,13 @@ export default function Experience() {
                 ))}
               </div>
             </section>
+            )}
 
-            <section className="reveal grid gap-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            {visibleSections >= 3 && (
+              <section
+                ref={(el) => (sectionRefs[2].current = el)}
+                className="reveal grid gap-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
+              >
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">3 · Service address</p>
                 <h2 className="text-3xl font-bold text-white sm:text-4xl">Center on Southlake and confirm your address</h2>
@@ -371,8 +439,13 @@ export default function Experience() {
                 </div>
               </div>
             </section>
+            )}
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30">
+            {visibleSections >= 4 && (
+              <section
+                ref={(el) => (sectionRefs[3].current = el)}
+                className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30"
+              >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">4 · About us</p>
@@ -428,15 +501,21 @@ export default function Experience() {
                 </div>
               </div>
             </section>
+            )}
 
-            <section className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30">
+            {visibleSections >= 5 && (
+              <section
+                ref={(el) => (sectionRefs[4].current = el)}
+                className="reveal space-y-6 rounded-3xl border border-white/10 bg-white/10 p-8 shadow-xl shadow-black/30"
+              >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">5 · Service milestones</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Follow the project horizontally</h2>
                   <p className="text-lg text-slate-200">
                     A simplified diagram shows how we move from first contact to cleanup. Each step locks into your tracker so you
-                    always know what is next.
+                    always know what is next. Drop an email here and we will send tracking notifications, estimates, and invoices
+                    as soon as they are ready.
                   </p>
                 </div>
                 <div className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-100">
@@ -461,16 +540,52 @@ export default function Experience() {
                   ))}
                 </div>
               </div>
+              <div className="grid gap-4 rounded-2xl border border-white/15 bg-slate-900/70 p-5 text-sm text-slate-100 sm:grid-cols-[1fr_260px]">
+                <div>
+                  <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Email for updates</label>
+                  <p className="mt-1 text-slate-200">Add where we should send live tracking, invoices, and estimates.</p>
+                  <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+                    <input
+                      type="email"
+                      value={tracking.notificationEmail ?? ""}
+                      onChange={(e) => setTracking((prev) => ({ ...prev, notificationEmail: e.target.value }))}
+                      placeholder="updates@example.com"
+                      className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-blue focus:outline-none"
+                    />
+                    <button
+                      className="w-full rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5 sm:w-auto"
+                      onClick={() => tracking.notificationEmail && handleNotificationEmail(tracking.notificationEmail)}
+                      disabled={!tracking.notificationEmail}
+                    >
+                      Save + keep me posted
+                    </button>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-white/20 bg-white/5 p-4 text-xs text-slate-200">
+                  <p className="font-semibold text-white">Why email?</p>
+                  <ul className="mt-2 space-y-1">
+                    <li>• Delivery of tracking notifications.</li>
+                    <li>• Estimate + invoice PDFs as they publish.</li>
+                    <li>• Appointment confirmations and reschedules.</li>
+                  </ul>
+                </div>
+              </div>
             </section>
+            )}
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30">
+            {visibleSections >= 6 && (
+              <section
+                ref={(el) => (sectionRefs[5].current = el)}
+                className="reveal rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl shadow-black/30"
+              >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">6 · Final contact</p>
-                  <h2 className="text-3xl font-bold text-white sm:text-4xl">Share how to reach you and open live chat</h2>
+                  <h2 className="text-3xl font-bold text-white sm:text-4xl">Chat or call to lock the estimate time</h2>
                   <p className="text-lg text-slate-300">
-                    Add an email and phone number for scheduling. The live widget connects you directly with the crew to lock your
-                    estimate time.
+                    Choose whether we reach out by text or by phone. As soon as you pick, we send everything in your tracker to
+                    our scheduling widget (hooked to GHL CRM) so the team can respond live or route you to our voice AI if the
+                    line is busy.
                   </p>
                 </div>
                 <div className="rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-slate-100 ring-1 ring-white/10">
@@ -479,15 +594,7 @@ export default function Experience() {
               </div>
 
               <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-                <div className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-100">
-                  <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Email</label>
-                  <input
-                    type="email"
-                    placeholder="you@example.com"
-                    value={tracking.email ?? ""}
-                    onChange={(e) => setTracking((prev) => ({ ...prev, email: e.target.value }))}
-                    className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-blue focus:outline-none"
-                  />
+                <div className="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-100">
                   <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Phone</label>
                   <input
                     type="tel"
@@ -496,11 +603,48 @@ export default function Experience() {
                     onChange={(e) => setTracking((prev) => ({ ...prev, phone: e.target.value }))}
                     className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-blue focus:outline-none"
                   />
+
+                  <div className="space-y-2">
+                    <p className="text-xs uppercase tracking-[0.2em] text-sky-200">How should we connect?</p>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {["text", "phone"].map((method) => (
+                        <button
+                          key={method}
+                          className={`rounded-xl border px-4 py-3 text-sm font-semibold shadow-sm transition ${
+                            tracking.contactPreference === method
+                              ? "border-brand-blue bg-sky-50 text-slate-900"
+                              : "border-white/20 bg-slate-900/60 text-white"
+                          }`}
+                          onClick={() => setTracking((prev) => ({ ...prev, contactPreference: method as "text" | "phone" }))}
+                        >
+                          {method === "text" ? "Text me" : "Call me"}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="text-slate-200">
+                      We will send your saved service, crew, and address details to the widget so the responder is fully briefed.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Upload site photos</label>
+                    <input
+                      type="file"
+                      multiple
+                      className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-blue file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
+                    />
+                    <p className="text-slate-300">Drop images while we chat so the tech sees the space instantly.</p>
+                  </div>
+
                   <button
-                    className="mt-3 w-full rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
-                    onClick={() => handleContactSave(tracking.email ?? "", tracking.phone ?? "")}
+                    className="mt-3 w-full rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50"
+                    onClick={() => {
+                      handleContactSave(tracking.email ?? tracking.notificationEmail ?? "", tracking.phone ?? "");
+                      handleWidgetLaunch();
+                    }}
+                    disabled={!tracking.phone || !tracking.contactPreference}
                   >
-                    Save contact + sync to tracker
+                    Send details to scheduling widget
                   </button>
                 </div>
 
@@ -513,53 +657,61 @@ export default function Experience() {
                     <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-[11px] font-semibold text-emerald-50">Online</span>
                   </div>
                   <p className="text-emerald-50">
-                    Open the widget to coordinate your estimate appointment. Once the chat ends, we will redirect you to your new
-                    dashboard with everything you entered today.
+                    The widget shares your tracker with our CRM, triggers a workflow to create your profile, and books the first
+                    available estimate slot. Someone will pick up live or our voice AI will route your call; the chat can also
+                    capture notes while you upload photos.
                   </p>
                   <button
                     className="w-full rounded-full border border-emerald-400/60 bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-                    onClick={() => {
-                      setChatOpen(true);
-                      appendActivity("Live widget opened to schedule an estimate.");
-                    }}
+                    onClick={handleWidgetLaunch}
+                    disabled={!tracking.phone || !tracking.contactPreference}
                   >
                     Launch live chat
                   </button>
                   {chatOpen && (
                     <div className="rounded-xl border border-white/20 bg-slate-950/60 p-4 text-slate-100">
                       <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Session active</p>
-                      <p className="mt-2 text-sm">Crew chat is live. After the conversation, you will head to your dashboard with your saved plan.</p>
+                      <p className="mt-2 text-sm">
+                        Crew chat is live. After the conversation, you will head to your dashboard with your saved plan and
+                        payment + invoice links.
+                      </p>
                     </div>
                   )}
                 </div>
               </div>
             </section>
+            )}
 
-            <section className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-8 text-center shadow-xl shadow-black/30">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Ready when you are</p>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">Finish the form and move to your dashboard</h2>
-              <p className="mx-auto max-w-3xl text-lg text-slate-200">
-                The summary on the right captures each section. Once you connect with the crew, you will be redirected to the
-                dashboard to follow the service.
-              </p>
-              <div className="mt-6 flex flex-wrap justify-center gap-4">
-                <Link
-                  className="rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5 hover:shadow-sky-500/40"
-                  href="/dashboard"
-                >
-                  Continue to dashboard
-                </Link>
-                <Link
-                  className="rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-slate-100 transition hover:-translate-y-0.5 hover:border-white/40"
-                  href="/"
-                >
-                  Back to instructions
-                </Link>
-              </div>
-            </section>
+            {visibleSections >= 7 && (
+              <section
+                ref={(el) => (sectionRefs[6].current = el)}
+                className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-8 text-center shadow-xl shadow-black/30"
+              >
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Ready when you are</p>
+                <h2 className="text-3xl font-bold text-white sm:text-4xl">Finish the form and move to your dashboard</h2>
+                <p className="mx-auto max-w-3xl text-lg text-slate-200">
+                  The summary on the right captures each section. Once you connect with the crew, you will be redirected to the
+                  dashboard to follow the service.
+                </p>
+                <div className="mt-6 flex flex-wrap justify-center gap-4">
+                  <Link
+                    className="rounded-full bg-brand-blue px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5 hover:shadow-sky-500/40"
+                    href="/dashboard"
+                  >
+                    Continue to dashboard
+                  </Link>
+                  <Link
+                    className="rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-slate-100 transition hover:-translate-y-0.5 hover:border-white/40"
+                    href="/"
+                  >
+                    Back to instructions
+                  </Link>
+                </div>
+              </section>
+            )}
           </div>
 
-          <aside className="sticky top-10 hidden h-fit space-y-4 rounded-3xl border border-white/15 bg-slate-950/80 p-6 shadow-xl shadow-black/30 backdrop-blur lg:block">
+          <aside className="sticky top-4 h-fit max-h-[calc(100vh-2rem)] space-y-4 overflow-y-auto rounded-3xl border border-white/15 bg-slate-950/80 p-6 shadow-xl shadow-black/30 backdrop-blur">
             <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-slate-200">
               <span>Tracking</span>
               <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-[11px] text-emerald-100">Live</span>
