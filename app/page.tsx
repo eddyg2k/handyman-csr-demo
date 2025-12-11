@@ -33,17 +33,17 @@ export default function Landing() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 py-12 text-center">
         <motion.div
-          className="mb-10 flex items-center gap-4 rounded-full border border-white/10 bg-white/10 px-6 py-3 shadow-lg shadow-sky-500/20 backdrop-blur"
+          className="mb-10 flex items-center gap-5 rounded-full border border-white/10 bg-white/10 px-6 py-3 shadow-lg shadow-sky-500/20 backdrop-blur"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="relative h-12 w-12 overflow-hidden rounded-full bg-white/90 p-1">
+          <div className="relative h-16 w-16 overflow-hidden rounded-full bg-white/90 p-2">
             <Image
               src="/handyman logo no background.png"
               alt="Handyman logo"
               fill
-              sizes="48px"
+              sizes="64px"
               className="object-contain"
               priority
             />
