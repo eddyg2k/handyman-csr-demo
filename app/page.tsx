@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const floatingBadges = [
-  { label: "Licensed & Insured", position: "left-6 top-10" },
+  { label: "Licensed & Insured", position: "left-6 top-28" },
   { label: "Same-Day Support", position: "right-6 top-16" },
   { label: "Craftsman Verified", position: "left-12 bottom-12" },
 ];
@@ -30,6 +30,22 @@ export default function Landing() {
           transition={{ duration: 1.2, ease: "ease-out" }}
         />
       </div>
+
+      <motion.div
+        className="absolute left-6 top-6 z-20"
+        initial={{ opacity: 0, y: -12, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <Image
+          src="/LOGO SVG NO BACKGROUND TRANSPARENT.svg"
+          alt="Handyman brand logo"
+          width={180}
+          height={72}
+          priority
+          className="w-36 md:w-40 drop-shadow-[0_12px_32px_rgba(56,189,248,0.48)] brightness-110 saturate-125 transition-transform duration-500 ease-out will-change-transform hover:scale-[1.04] hover:drop-shadow-[0_16px_40px_rgba(56,189,248,0.58)]"
+        />
+      </motion.div>
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 py-12 text-center">
         <motion.div
