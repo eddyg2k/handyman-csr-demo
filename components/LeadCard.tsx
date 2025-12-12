@@ -6,7 +6,7 @@ interface LeadCardProps {
 
 export default function LeadCard({ lead }: LeadCardProps) {
   return (
-    <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 hover:border-brand-blue transition">
+    <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 hover:border-brand-gold transition">
       <div className="flex justify-between items-center mb-1">
         <p className="text-xl font-semibold">{lead.name}</p>
         <span
@@ -27,13 +27,13 @@ export default function LeadCard({ lead }: LeadCardProps) {
       <div className="mt-3 space-y-1 text-sm text-gray-200">
         {lead.service && (
           <p>
-            <span className="font-semibold text-brand-blue">Service:</span> {lead.service}
+            <span className="font-semibold text-brand-gold">Service:</span> {lead.service}
             {lead.serviceDetail ? ` · ${lead.serviceDetail}` : ""}
           </p>
         )}
         {lead.scheduleWindow && (
           <p>
-            <span className="font-semibold text-brand-blue">Schedule:</span> {lead.scheduleWindow}
+            <span className="font-semibold text-brand-gold">Schedule:</span> {lead.scheduleWindow}
           </p>
         )}
         {lead.notificationEmail && (
