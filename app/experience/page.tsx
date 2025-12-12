@@ -341,7 +341,7 @@ export default function Experience() {
           className="object-cover opacity-45 mix-blend-overlay"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-900/80 to-slate-950/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.16),transparent_38%),radial-gradient(circle_at_80%_30%,rgba(248,113,113,0.14),transparent_42%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(250,191,36,0.16),transparent_38%),radial-gradient(circle_at_80%_30%,rgba(248,204,21,0.14),transparent_42%)]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-10 lg:py-14">
@@ -364,7 +364,7 @@ export default function Experience() {
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <Link
-                    className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-slate-950 shadow-xl shadow-amber-300/40 transition hover:-translate-y-0.5"
                     href="/dashboard"
                   >
                     Open draft dashboard
@@ -457,7 +457,7 @@ export default function Experience() {
                         Cancel
                       </button>
                       <button
-                        className="rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                        className="rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-slate-950 shadow-md shadow-amber-300/40 transition hover:-translate-y-0.5"
                         onClick={handleServiceConfirm}
                       >
                         Save selection
@@ -496,7 +496,7 @@ export default function Experience() {
                     <h3 className="text-lg font-semibold text-white">{profile.name}</h3>
                     <p className="mt-2 text-sm text-slate-200">{profile.focus}</p>
                     <button
-                      className="mt-4 w-full rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                      className="mt-4 w-full rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-slate-950 shadow-md shadow-amber-300/40 transition hover:-translate-y-0.5"
                       onClick={() => handleCrewSelect(profile.focus)}
                     >
                       Add crew focus
@@ -765,7 +765,7 @@ export default function Experience() {
                   </div>
 
                   <button
-                    className="w-full rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                    className="w-full rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-slate-950 shadow-md shadow-amber-300/40 transition hover:-translate-y-0.5"
                     onClick={() => handleContactSave(tracking.email ?? "", tracking.phone ?? "")}
                   >
                     Save contact + sync to tracker
@@ -795,7 +795,7 @@ export default function Experience() {
                   <button
                     className={`w-full rounded-full px-4 py-2 text-sm font-semibold transition ${
                       canSyncScheduling
-                        ? "bg-brand-blue text-white hover:-translate-y-0.5"
+                        ? "bg-brand-blue text-slate-950 hover:-translate-y-0.5"
                         : "bg-slate-800 text-slate-300"
                     }`}
                     onClick={syncScheduling}
@@ -841,7 +841,7 @@ export default function Experience() {
                   className={`rounded-full px-7 py-3 text-sm font-semibold shadow-lg transition ${
                     completionLocked
                       ? "cursor-not-allowed bg-slate-800 text-slate-300 shadow-none"
-                      : "bg-brand-blue text-white shadow-sky-500/20 hover:-translate-y-0.5 hover:shadow-sky-500/40"
+                      : "bg-brand-blue text-slate-950 shadow-amber-300/25 hover:-translate-y-0.5 hover:shadow-amber-200/60"
                   }`}
                   href={completionLocked ? "#" : "/dashboard"}
                   aria-disabled={completionLocked}

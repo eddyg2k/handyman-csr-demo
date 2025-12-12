@@ -13,6 +13,26 @@ const floatingBadges = [
 export default function Intro() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+      <motion.div
+        className="absolute left-6 top-6 z-20 flex items-center gap-3 rounded-2xl border border-amber-200/40 bg-slate-900/70 px-4 py-3 shadow-lg shadow-amber-300/25 backdrop-blur"
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.15 }}
+      >
+        <Image
+          src="/Official Logo of HOSL.svg"
+          alt="Official Handyman of Southlake logo"
+          width={140}
+          height={64}
+          className="drop-shadow-[0_8px_18px_rgba(248,204,21,0.35)]"
+          priority
+        />
+        <div className="hidden sm:flex flex-col text-left text-amber-50">
+          <span className="text-[11px] uppercase tracking-[0.24em] text-amber-200">Brand mark</span>
+          <span className="text-sm font-semibold">Handyman of Southlake</span>
+        </div>
+      </motion.div>
+
       <div className="absolute inset-0">
         <Image
           src="/picture of handyman and houses for a background.svg"
@@ -24,7 +44,7 @@ export default function Intro() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/70 to-slate-950/80" />
         <motion.div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.18),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(248,113,113,0.16),transparent_42%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(250,191,36,0.16),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(248,204,21,0.14),transparent_42%)]"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "ease-out" }}
@@ -33,7 +53,7 @@ export default function Intro() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 py-12 text-center">
         <motion.div
-          className="mb-10 flex items-center gap-4 rounded-full border border-white/10 bg-white/10 px-6 py-3 shadow-lg shadow-sky-500/20 backdrop-blur"
+          className="mb-10 flex items-center gap-4 rounded-full border border-white/10 bg-white/10 px-6 py-3 shadow-lg shadow-amber-300/20 backdrop-blur"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -54,7 +74,7 @@ export default function Intro() {
         </motion.div>
 
         <motion.h1
-          className="max-w-4xl text-4xl font-extrabold leading-tight text-sky-50 sm:text-5xl lg:text-6xl"
+          className="max-w-4xl text-4xl font-extrabold leading-tight text-amber-50 drop-shadow-[0_12px_32px_rgba(250,204,21,0.18)] sm:text-5xl lg:text-6xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.35 }}
@@ -80,7 +100,7 @@ export default function Intro() {
         >
           <Link
             href="/experience"
-            className="rounded-full bg-brand-blue px-8 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5 hover:shadow-sky-400/40"
+            className="rounded-full bg-brand-blue px-8 py-3 text-sm font-semibold text-slate-950 shadow-xl shadow-amber-300/40 transition hover:-translate-y-0.5 hover:shadow-amber-200/60"
           >
             Enter the experience
           </Link>
@@ -101,11 +121,11 @@ export default function Intro() {
           {["Same-day scheduling", "Polished craftsmanship", "Respectful, on-time crews"].map((item) => (
             <motion.div
               key={item}
-              className="rounded-2xl border border-white/10 bg-white/10 p-4 text-left shadow-lg shadow-black/20 backdrop-blur"
+              className="rounded-2xl border border-amber-100/10 bg-white/10 p-4 text-left shadow-lg shadow-black/20 backdrop-blur"
               whileHover={{ transform: "translateY(-6px)", backgroundColor: "rgba(255,255,255,0.14)" }}
               transition={{ duration: 0.4 }}
             >
-              <p className="text-sm font-semibold text-sky-100">{item}</p>
+              <p className="text-sm font-semibold text-amber-100">{item}</p>
               <p className="mt-2 text-sm text-slate-100/90">
                 Every detail is handled with care so your home feels refreshed from the first knock.
               </p>
@@ -127,17 +147,33 @@ export default function Intro() {
       ))}
 
       <motion.div
-        className="pointer-events-none absolute -left-20 top-1/3 h-72 w-72 rounded-full bg-sky-400/10 blur-3xl"
+        className="pointer-events-none absolute -left-20 top-1/3 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl"
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.1, delay: 0.5 }}
       />
       <motion.div
-        className="pointer-events-none absolute -right-16 bottom-10 h-64 w-64 rounded-full bg-rose-400/10 blur-3xl"
+        className="pointer-events-none absolute -right-16 bottom-10 h-64 w-64 rounded-full bg-amber-200/10 blur-3xl"
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.1, delay: 0.55 }}
       />
+      <motion.div
+        className="pointer-events-none absolute bottom-8 right-8 z-10"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.7 }}
+      >
+        <div className="relative h-16 w-16 rounded-2xl border border-amber-100/20 bg-slate-900/60 p-3 shadow-lg shadow-amber-300/30 backdrop-blur">
+          <Image
+            src="/Official Logo of HOSL.svg"
+            alt="Handyman of Southlake watermark"
+            fill
+            sizes="64px"
+            className="object-contain drop-shadow-[0_6px_14px_rgba(248,204,21,0.4)]"
+          />
+        </div>
+      </motion.div>
     </main>
   );
 }
