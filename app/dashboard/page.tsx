@@ -17,7 +17,7 @@ export default function Dashboard() {
       <div className="mx-auto max-w-6xl space-y-8">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-sky-200">Handyman of Southlake</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-brand-gold">Handyman of Southlake</p>
             <h1 className="text-3xl font-bold text-white sm:text-4xl">Service hub</h1>
             <p className="text-gray-400">
               Job snapshot, documents, communications, and active requests populated from guided intake.
@@ -34,7 +34,7 @@ export default function Dashboard() {
             <div className="rounded-3xl border border-white/10 bg-slate-900/70 p-6 shadow-lg shadow-black/25">
               <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Job snapshot</p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">Job snapshot</p>
                   <h2 className="text-2xl font-semibold text-white">{activeLead?.service ?? "Service intake"}</h2>
                 </div>
                 <select
@@ -52,14 +52,14 @@ export default function Dashboard() {
 
               <div className="mt-4 grid gap-4 md:grid-cols-2">
                 <div className="space-y-2 rounded-2xl border border-white/10 bg-slate-950/70 p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Client</p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">Client</p>
                   <p className="text-lg font-semibold">{activeLead?.name}</p>
                   <p className="text-sm text-slate-300">{activeLead?.phone}</p>
                   <p className="text-sm text-slate-300">{activeLead?.city}</p>
                   <p className="text-xs text-slate-400">Notifications: {activeLead?.notificationEmail}</p>
                 </div>
                 <div className="space-y-2 rounded-2xl border border-white/10 bg-slate-950/70 p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Visit details</p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">Visit details</p>
                   <p className="text-sm text-slate-100">{activeLead?.description}</p>
                   <p className="text-sm text-slate-100">
                     {activeLead?.service} {activeLead?.serviceDetail ? `· ${activeLead.serviceDetail}` : ""}
@@ -75,13 +75,13 @@ export default function Dashboard() {
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-3 rounded-3xl border border-white/10 bg-slate-900/70 p-5">
                 <div className="flex items-center justify-between">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Documents</p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">Documents</p>
                   <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] text-slate-100">Synced</span>
                 </div>
                 <ul className="space-y-2 text-sm text-slate-100">
                   {activeLead?.documents?.map((doc) => (
                     <li key={doc} className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2">
-                      <span className="size-2 rounded-full bg-brand-blue" aria-hidden />
+                      <span className="size-2 rounded-full bg-brand-gold" aria-hidden />
                       {doc}
                     </li>
                   ))}
@@ -91,7 +91,7 @@ export default function Dashboard() {
 
               <div className="space-y-3 rounded-3xl border border-white/10 bg-slate-900/70 p-5">
                 <div className="flex items-center justify-between">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Communications</p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">Communications</p>
                   <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] text-slate-100">Timeline</span>
                 </div>
                 <ul className="space-y-2 text-sm text-slate-100">
@@ -108,7 +108,7 @@ export default function Dashboard() {
 
             <div className="rounded-3xl border border-white/10 bg-slate-900/70 p-5">
               <div className="flex items-center justify-between">
-                <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Active requests</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">Active requests</p>
                 <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] text-slate-100">From intake</span>
               </div>
               <ul className="mt-3 space-y-2 text-sm text-slate-100">
@@ -125,7 +125,7 @@ export default function Dashboard() {
 
           <div className="space-y-4">
             <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Intake feed</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">Intake feed</p>
               <p className="mt-1 text-sm text-slate-200">Preview of captured leads</p>
               <div className="mt-3 grid gap-3">
                 {leads.map((lead) => (
@@ -133,7 +133,7 @@ export default function Dashboard() {
                     key={lead.id}
                     onClick={() => setSelectedLeadId(lead.id)}
                     className={`text-left transition hover:-translate-y-0.5 ${
-                      lead.id === activeLead?.id ? "ring-2 ring-brand-blue" : ""
+                      lead.id === activeLead?.id ? "ring-2 ring-brand-gold" : ""
                     }`}
                   >
                     <LeadCard lead={lead} />

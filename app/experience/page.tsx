@@ -341,7 +341,7 @@ export default function Experience() {
           className="object-cover opacity-45 mix-blend-overlay"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-900/80 to-slate-950/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.16),transparent_38%),radial-gradient(circle_at_80%_30%,rgba(248,113,113,0.14),transparent_42%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(246,195,67,0.16),transparent_38%),radial-gradient(circle_at_80%_30%,rgba(56,189,248,0.12),transparent_42%),radial-gradient(circle_at_16%_82%,rgba(255,231,163,0.12),transparent_42%)]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-10 lg:py-14">
@@ -353,8 +353,8 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Start here</p>
-                  <h1 className="text-4xl font-extrabold leading-tight text-sky-50 sm:text-5xl">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">Start here</p>
+                  <h1 className="text-4xl font-extrabold leading-tight text-amber-50 sm:text-5xl">
                     Build your handyman visit in seven guided steps
                   </h1>
                   <p className="mt-3 max-w-3xl text-lg text-slate-100/90">
@@ -364,7 +364,7 @@ export default function Experience() {
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <Link
-                    className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-full bg-brand-gold px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-amber-400/30 transition hover:-translate-y-0.5"
                     href="/dashboard"
                   >
                     Open draft dashboard
@@ -385,7 +385,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">1 · Service menu</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">1 · Service menu</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Choose what we will tackle</h2>
                   <p className="text-lg text-slate-200">
                     Tap a service to open quick options. We will save the one you pick to your plan so the crew arrives with the
@@ -433,7 +433,7 @@ export default function Experience() {
                         <label
                           key={option}
                           className={`cursor-pointer rounded-xl border p-4 text-sm font-semibold shadow-sm transition ${
-                            serviceOption === option ? "border-brand-blue bg-sky-50 text-slate-900" : "border-slate-200 bg-white"
+                            serviceOption === option ? "border-brand-gold bg-amber-50 text-slate-900" : "border-slate-200 bg-white"
                           }`}
                         >
                           <input
@@ -457,7 +457,7 @@ export default function Experience() {
                         Cancel
                       </button>
                       <button
-                        className="rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                        className="rounded-full bg-brand-gold px-6 py-2 text-sm font-semibold text-white shadow-md shadow-amber-400/30 transition hover:-translate-y-0.5"
                         onClick={handleServiceConfirm}
                       >
                         Save selection
@@ -474,7 +474,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">2 · Meet the crew</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">2 · Meet the crew</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Certified, local, and ready</h2>
                   <p className="text-lg text-slate-300">
                     Preview who is coming to your home. Choose the focus that fits your request and we will pin that crew to your
@@ -496,7 +496,7 @@ export default function Experience() {
                     <h3 className="text-lg font-semibold text-white">{profile.name}</h3>
                     <p className="mt-2 text-sm text-slate-200">{profile.focus}</p>
                     <button
-                      className="mt-4 w-full rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                      className="mt-4 w-full rounded-full bg-brand-gold px-4 py-2 text-sm font-semibold text-white shadow-md shadow-amber-400/30 transition hover:-translate-y-0.5"
                       onClick={() => handleCrewSelect(profile.focus)}
                     >
                       Add crew focus
@@ -511,7 +511,7 @@ export default function Experience() {
               className="reveal grid gap-5 rounded-3xl border border-white/10 bg-white/10 p-7 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
             >
               <div className="space-y-4">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">3 · Service address</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">3 · Service address</p>
                 <h2 className="text-3xl font-bold text-white sm:text-4xl">Center on Southlake and confirm your address</h2>
                 <p className="text-lg text-slate-200">
                   Use our quick matcher to keep the map aligned. As soon as you select an address, it is logged to your tracker
@@ -524,7 +524,7 @@ export default function Experience() {
                   onChange={(e) => handleAddressInput(e.target.value)}
                   list="address-list"
                   placeholder="Start typing Southlake..."
-                  className="mt-2 w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-blue focus:outline-none"
+                  className="mt-2 w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-gold focus:outline-none"
                 />
                 <datalist id="address-list">
                   {filteredAddresses.map((address) => (
@@ -557,7 +557,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">4 · About us</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">4 · About us</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Meet the team behind the tools</h2>
                   <p className="text-lg text-slate-300">
                     Local, insured professionals with a track record for tidy workmanship and responsive updates. Preview our
@@ -598,13 +598,13 @@ export default function Experience() {
                 </div>
 
                 <div className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-100">
-                  <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Who should we greet?</label>
+                  <label className="text-xs uppercase tracking-[0.2em] text-brand-gold">Who should we greet?</label>
                   <input
                     type="text"
                     placeholder="Your name"
                     value={tracking.name ?? ""}
                     onChange={(e) => handleNameUpdate(e.target.value)}
-                    className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-blue focus:outline-none"
+                    className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-gold focus:outline-none"
                   />
                   <p className="text-slate-200">We add this to your visible tracker and share it with the crew lead.</p>
                 </div>
@@ -617,7 +617,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">5 · Service milestones</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">5 · Service milestones</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Follow the project horizontally</h2>
                   <p className="text-lg text-slate-200">
                     A simplified diagram shows how we move from first contact to cleanup. Each step locks into your tracker so you
@@ -649,25 +649,25 @@ export default function Experience() {
                 </div>
 
                 <div className="space-y-3 rounded-2xl border border-white/10 bg-slate-900/70 p-5 text-sm text-slate-100">
-                  <p className="text-xs uppercase tracking-[0.2em] text-sky-200">Service timeline capture</p>
-                  <label className="text-xs uppercase tracking-[0.18em] text-sky-200">Notification email</label>
+                  <p className="text-xs uppercase tracking-[0.2em] text-brand-gold">Service timeline capture</p>
+                  <label className="text-xs uppercase tracking-[0.18em] text-brand-gold">Notification email</label>
                   <input
                     type="email"
                     value={tracking.notificationEmail ?? tracking.email ?? ""}
                     onChange={(e) => handleNotificationUpdate(e.target.value)}
                     placeholder="estimates@yourdomain.com"
-                    className="w-full rounded-xl border border-white/20 bg-slate-950/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-blue focus:outline-none"
+                    className="w-full rounded-xl border border-white/20 bg-slate-950/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-gold focus:outline-none"
                   />
                   <p className="text-slate-300">Estimate and invoice notifications will route here and into your dashboard timeline.</p>
 
-                  <label className="text-xs uppercase tracking-[0.18em] text-sky-200">Schedule window</label>
+                  <label className="text-xs uppercase tracking-[0.18em] text-brand-gold">Schedule window</label>
                   <div className="grid gap-2 md:grid-cols-2">
                     {scheduleWindows.map((window) => (
                       <button
                         key={window}
                         className={`rounded-xl border px-3 py-2 text-left text-sm font-semibold transition ${
                           tracking.scheduleWindow === window
-                            ? "border-brand-blue bg-white/10 text-white"
+                            ? "border-brand-gold bg-white/10 text-white"
                             : "border-white/10 bg-white/5 text-slate-200"
                         }`}
                         onClick={() => handleScheduleWindow(window)}
@@ -686,7 +686,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">6 · Final contact</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">6 · Final contact</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Share how to reach you and open live chat</h2>
                   <p className="text-lg text-slate-300">
                     Add an email and phone number for scheduling. The live widget connects you directly with the crew to lock your
@@ -701,36 +701,36 @@ export default function Experience() {
               <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
                 <div className="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-100">
                   <div className="grid gap-2">
-                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Email</label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-brand-gold">Email</label>
                     <input
                       type="email"
                       placeholder="you@example.com"
                       value={tracking.email ?? ""}
                       onChange={(e) => handleEmailInput(e.target.value)}
-                      className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-blue focus:outline-none"
+                      className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-gold focus:outline-none"
                     />
                   </div>
 
                   <div className="grid gap-2">
-                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Phone</label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-brand-gold">Phone</label>
                     <input
                       type="tel"
                       placeholder="(817) 555-0199"
                       value={tracking.phone ?? ""}
                       onChange={(e) => handlePhoneInput(e.target.value)}
-                      className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-blue focus:outline-none"
+                      className="w-full rounded-xl border border-white/20 bg-slate-900/70 px-4 py-3 text-sm text-white shadow-inner shadow-black/30 focus:border-brand-gold focus:outline-none"
                     />
                   </div>
 
                   <div className="grid gap-2">
-                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Text or phone updates?</label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-brand-gold">Text or phone updates?</label>
                     <div className="grid grid-cols-2 gap-2">
                       {(["Text", "Phone"] as ContactPreference[]).map((option) => (
                         <button
                           key={option}
                           className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${
                             tracking.contactPreference === option
-                              ? "border-brand-blue bg-white/10 text-white"
+                              ? "border-brand-gold bg-white/10 text-white"
                               : "border-white/20 bg-slate-900/60 text-slate-100"
                           }`}
                           onClick={() => handlePreferenceSelect(option)}
@@ -742,13 +742,13 @@ export default function Experience() {
                   </div>
 
                   <div className="grid gap-2">
-                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Upload project photos</label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-brand-gold">Upload project photos</label>
                     <input
                       type="file"
                       accept="image/*"
                       multiple
                       onChange={(e) => handlePhotoUpload(e.target.files)}
-                      className="w-full rounded-xl border border-dashed border-white/25 bg-slate-900/70 px-4 py-3 text-sm text-slate-200 focus:border-brand-blue focus:outline-none"
+                      className="w-full rounded-xl border border-dashed border-white/25 bg-slate-900/70 px-4 py-3 text-sm text-slate-200 focus:border-brand-gold focus:outline-none"
                     />
                     {tracking.photos?.length ? (
                       <ul className="space-y-1 text-xs text-slate-200">
@@ -765,7 +765,7 @@ export default function Experience() {
                   </div>
 
                   <button
-                    className="w-full rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                    className="w-full rounded-full bg-brand-gold px-6 py-2 text-sm font-semibold text-white shadow-md shadow-amber-400/30 transition hover:-translate-y-0.5"
                     onClick={() => handleContactSave(tracking.email ?? "", tracking.phone ?? "")}
                   >
                     Save contact + sync to tracker
@@ -795,7 +795,7 @@ export default function Experience() {
                   <button
                     className={`w-full rounded-full px-4 py-2 text-sm font-semibold transition ${
                       canSyncScheduling
-                        ? "bg-brand-blue text-white hover:-translate-y-0.5"
+                        ? "bg-brand-gold text-white hover:-translate-y-0.5"
                         : "bg-slate-800 text-slate-300"
                     }`}
                     onClick={syncScheduling}
@@ -830,7 +830,7 @@ export default function Experience() {
               ref={makeSectionRef("completion")}
               className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-7 text-center shadow-xl shadow-black/30"
             >
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Ready when you are</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">Ready when you are</p>
               <h2 className="text-3xl font-bold text-white sm:text-4xl">Finish the form and move to your dashboard</h2>
               <p className="mx-auto max-w-3xl text-lg text-slate-200">
                 The summary on the right captures each section. Sync your phone, preference, and photos into scheduling to
@@ -841,7 +841,7 @@ export default function Experience() {
                   className={`rounded-full px-7 py-3 text-sm font-semibold shadow-lg transition ${
                     completionLocked
                       ? "cursor-not-allowed bg-slate-800 text-slate-300 shadow-none"
-                      : "bg-brand-blue text-white shadow-sky-500/20 hover:-translate-y-0.5 hover:shadow-sky-500/40"
+                  : "bg-brand-gold text-white shadow-amber-400/20 hover:-translate-y-0.5 hover:shadow-amber-300/50"
                   }`}
                   href={completionLocked ? "#" : "/dashboard"}
                   aria-disabled={completionLocked}
@@ -872,13 +872,13 @@ export default function Experience() {
             <div className="space-y-3">
               {selectionSummary.map((item) => (
                 <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-3.5">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{item.label}</p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">{item.label}</p>
                   <p className="mt-1 text-sm text-white">{item.value}</p>
                 </div>
               ))}
             </div>
             <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-3.5 text-sm text-slate-100">
-              <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Activity log</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-brand-gold">Activity log</p>
               {activity.length === 0 ? (
                 <p className="mt-2 text-slate-300">Your choices will appear here as you move through the sections.</p>
               ) : (
