@@ -13,6 +13,23 @@ const floatingBadges = [
 export default function Landing() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+      <motion.div
+        className="absolute left-6 top-6 z-30 sm:left-8 sm:top-8"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+        whileHover={{ scale: 1.03, filter: "drop-shadow(0px 14px 32px rgba(56,189,248,0.35))" }}
+      >
+        <Image
+          src="/LOGO SVG NO BACKGROUND TRANSPARENT.svg"
+          alt="Handyman logo"
+          width={180}
+          height={64}
+          priority
+          className="h-auto w-[165px] max-w-xs drop-shadow-[0_10px_28px_rgba(56,189,248,0.32)] saturate-125 contrast-110 brightness-110 transition-transform duration-300"
+        />
+      </motion.div>
+
       <div className="absolute inset-0">
         <Image
           src="/picture of handyman and houses for a background.svg"
