@@ -24,7 +24,7 @@ export default function Landing() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/70 to-slate-950/80" />
         <motion.div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.18),transparent_40%),radial-gradient(circle_at_80%_30%,rgba(248,113,113,0.16),transparent_42%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(246,195,67,0.18),transparent_40%),radial-gradient(circle_at_78%_34%,rgba(255,209,102,0.14),transparent_44%)]"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "ease-out" }}
@@ -33,7 +33,7 @@ export default function Landing() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 py-12 text-center">
         <motion.div
-          className="mb-10 flex items-center gap-4 rounded-full border border-white/10 bg-white/10 px-6 py-3 shadow-lg shadow-sky-500/20 backdrop-blur"
+          className="mb-10 flex items-center gap-4 rounded-full border border-white/10 bg-white/10 px-6 py-3 shadow-lg shadow-amber-400/20 backdrop-blur"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -54,7 +54,7 @@ export default function Landing() {
         </motion.div>
 
         <motion.h1
-          className="max-w-4xl text-4xl font-extrabold leading-tight text-sky-50 sm:text-5xl lg:text-6xl"
+          className="max-w-4xl text-4xl font-extrabold leading-tight text-amber-50 sm:text-5xl lg:text-6xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.35 }}
@@ -80,7 +80,7 @@ export default function Landing() {
         >
           <Link
             href="/experience"
-            className="rounded-full bg-brand-blue px-8 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5 hover:shadow-sky-400/40"
+            className="rounded-full bg-brand-blue px-8 py-3 text-sm font-semibold text-slate-900 shadow-xl shadow-amber-300/40 transition hover:-translate-y-0.5 hover:shadow-amber-200/50"
           >
             Continue to the site
           </Link>
@@ -105,7 +105,7 @@ export default function Landing() {
               whileHover={{ transform: "translateY(-6px)", backgroundColor: "rgba(255,255,255,0.14)" }}
               transition={{ duration: 0.4 }}
             >
-              <p className="text-sm font-semibold text-sky-100">{item}</p>
+              <p className="text-sm font-semibold text-amber-100">{item}</p>
               <p className="mt-2 text-sm text-slate-100/90">
                 Every detail is handled with care so your home feels refreshed from the first knock.
               </p>
@@ -117,7 +117,7 @@ export default function Landing() {
       {floatingBadges.map((badge, index) => (
         <motion.div
           key={badge.label}
-          className={`absolute z-10 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold text-slate-50 shadow-lg shadow-black/30 backdrop-blur ${badge.position}`}
+          className={`absolute z-10 rounded-full border border-amber-200/60 bg-white/10 px-4 py-2 text-xs font-semibold text-amber-50 shadow-lg shadow-amber-300/20 backdrop-blur ${badge.position}`}
           initial={{ opacity: 0, y: -10, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
@@ -127,17 +127,41 @@ export default function Landing() {
       ))}
 
       <motion.div
-        className="pointer-events-none absolute -left-20 top-1/3 h-72 w-72 rounded-full bg-sky-400/10 blur-3xl"
+        className="pointer-events-none absolute -left-20 top-1/3 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl"
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.1, delay: 0.5 }}
       />
       <motion.div
-        className="pointer-events-none absolute -right-16 bottom-10 h-64 w-64 rounded-full bg-rose-400/10 blur-3xl"
+        className="pointer-events-none absolute -right-16 bottom-10 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl"
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.1, delay: 0.55 }}
       />
+
+      <motion.div
+        className="absolute right-6 top-10 z-10 flex flex-col items-center gap-3 rounded-2xl border border-amber-200/50 bg-slate-900/80 px-4 py-3 shadow-2xl shadow-amber-300/20 backdrop-blur"
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.45 }}
+      >
+        <div className="relative h-20 w-20 overflow-hidden rounded-xl bg-white/90 p-2">
+          <Image src="/Official Logo of HOSL.svg" alt="Handyman of Southlake crest" fill className="object-contain" sizes="80px" />
+        </div>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-100">Official mark</p>
+      </motion.div>
+
+      <motion.div
+        className="absolute left-8 bottom-8 z-0 hidden items-center gap-3 rounded-full border border-amber-200/30 bg-slate-900/60 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-amber-50 shadow-lg shadow-amber-300/10 backdrop-blur md:flex"
+        initial={{ opacity: 0, x: -12 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.9, delay: 0.75 }}
+      >
+        <div className="relative h-8 w-8 overflow-hidden rounded-lg bg-white/90 p-1">
+          <Image src="/Official Logo of HOSL.svg" alt="Handyman monogram" fill className="object-contain" sizes="32px" />
+        </div>
+        <span>Trusted crews · Southlake</span>
+      </motion.div>
     </main>
   );
 }

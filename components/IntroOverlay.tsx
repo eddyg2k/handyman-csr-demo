@@ -51,7 +51,7 @@ export function IntroOverlay({ visible }: IntroOverlayProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/70 to-slate-950/85" />
         <motion.div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(56,189,248,0.14),transparent_40%),radial-gradient(circle_at_82%_28%,rgba(248,113,113,0.14),transparent_38%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(246,195,67,0.16),transparent_40%),radial-gradient(circle_at_82%_28%,rgba(255,209,102,0.14),transparent_38%)]"
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "ease-out" }}
@@ -60,7 +60,7 @@ export function IntroOverlay({ visible }: IntroOverlayProps) {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 py-14 text-center">
         <motion.div
-          className="mb-8 flex items-center gap-4 rounded-full border border-white/10 bg-white/10 px-6 py-3 shadow-lg shadow-sky-500/20 backdrop-blur"
+          className="mb-8 flex items-center gap-4 rounded-full border border-white/10 bg-white/10 px-6 py-3 shadow-lg shadow-amber-400/20 backdrop-blur"
           initial={{ opacity: 0, y: -24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
@@ -81,7 +81,7 @@ export function IntroOverlay({ visible }: IntroOverlayProps) {
         </motion.div>
 
         <motion.h1
-          className="max-w-4xl text-4xl font-extrabold leading-tight text-sky-50 sm:text-5xl lg:text-6xl"
+          className="max-w-4xl text-4xl font-extrabold leading-tight text-amber-50 sm:text-5xl lg:text-6xl"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.35 }}
@@ -105,7 +105,7 @@ export function IntroOverlay({ visible }: IntroOverlayProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.7 }}
         >
-          <span className="rounded-full bg-brand-blue px-8 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition">
+          <span className="rounded-full bg-brand-blue px-8 py-3 text-sm font-semibold text-slate-900 shadow-xl shadow-amber-300/40 transition">
             Entering experience...
           </span>
           <span className="rounded-full border border-white/25 px-7 py-3 text-sm font-semibold text-slate-100/90">
@@ -126,7 +126,7 @@ export function IntroOverlay({ visible }: IntroOverlayProps) {
               whileHover={{ transform: "translateY(-6px)", backgroundColor: "rgba(255,255,255,0.14)" }}
               transition={{ duration: 0.4 }}
             >
-              <p className="text-sm font-semibold text-sky-100">{item}</p>
+              <p className="text-sm font-semibold text-amber-100">{item}</p>
               <p className="mt-2 text-sm text-slate-100/90">
                 Every detail is handled with care so your home feels refreshed from the first knock.
               </p>
@@ -139,7 +139,7 @@ export function IntroOverlay({ visible }: IntroOverlayProps) {
         {floatingBadges.map((badge, index) => (
           <motion.div
             key={badge.label}
-            className={`absolute z-10 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold text-slate-50 shadow-lg shadow-black/30 backdrop-blur ${badge.position}`}
+            className={`absolute z-10 rounded-full border border-amber-200/60 bg-white/10 px-4 py-2 text-xs font-semibold text-amber-50 shadow-lg shadow-amber-300/20 backdrop-blur ${badge.position}`}
             initial={{ opacity: 0, y: -12, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 + index * 0.1 }}
@@ -148,13 +148,13 @@ export function IntroOverlay({ visible }: IntroOverlayProps) {
           </motion.div>
         ))}
         <motion.div
-          className="absolute -left-16 top-1/3 h-72 w-72 rounded-full bg-sky-400/10 blur-3xl"
+          className="absolute -left-16 top-1/3 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl"
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.1, delay: 0.5 }}
         />
         <motion.div
-          className="absolute -right-12 bottom-10 h-64 w-64 rounded-full bg-rose-400/10 blur-3xl"
+          className="absolute -right-12 bottom-10 h-64 w-64 rounded-full bg-amber-500/10 blur-3xl"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.1, delay: 0.55 }}

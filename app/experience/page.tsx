@@ -341,7 +341,7 @@ export default function Experience() {
           className="object-cover opacity-45 mix-blend-overlay"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-900/80 to-slate-950/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.16),transparent_38%),radial-gradient(circle_at_80%_30%,rgba(248,113,113,0.14),transparent_42%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(246,195,67,0.16),transparent_38%),radial-gradient(circle_at_78%_34%,rgba(255,209,102,0.14),transparent_44%)]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-10 lg:py-14">
@@ -353,8 +353,8 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Start here</p>
-                  <h1 className="text-4xl font-extrabold leading-tight text-sky-50 sm:text-5xl">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">Start here</p>
+                  <h1 className="text-4xl font-extrabold leading-tight text-amber-50 sm:text-5xl">
                     Build your handyman visit in seven guided steps
                   </h1>
                   <p className="mt-3 max-w-3xl text-lg text-slate-100/90">
@@ -362,15 +362,21 @@ export default function Experience() {
                     details. We will track everything live so your dashboard is ready when you finish.
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center gap-2 rounded-full border border-amber-200/50 bg-slate-900/70 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-100 shadow-md shadow-amber-300/15">
+                    <div className="relative h-8 w-8 overflow-hidden rounded-lg bg-white/90 p-1">
+                      <Image src="/Official Logo of HOSL.svg" alt="HOSL crest" fill className="object-contain" sizes="32px" />
+                    </div>
+                    Brand mark
+                  </div>
                   <Link
-                    className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-sky-500/30 transition hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-full bg-brand-blue px-6 py-3 text-sm font-semibold text-slate-900 shadow-xl shadow-amber-300/35 transition hover:-translate-y-0.5"
                     href="/dashboard"
                   >
                     Open draft dashboard
                   </Link>
                   <button
-                    className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-full border border-amber-200/40 px-6 py-3 text-sm font-semibold text-amber-100 transition hover:-translate-y-0.5"
                     onClick={() => scrollToSection("final-contact")}
                   >
                     Jump to final step
@@ -385,7 +391,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">1 · Service menu</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">1 · Service menu</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Choose what we will tackle</h2>
                   <p className="text-lg text-slate-200">
                     Tap a service to open quick options. We will save the one you pick to your plan so the crew arrives with the
@@ -433,7 +439,7 @@ export default function Experience() {
                         <label
                           key={option}
                           className={`cursor-pointer rounded-xl border p-4 text-sm font-semibold shadow-sm transition ${
-                            serviceOption === option ? "border-brand-blue bg-sky-50 text-slate-900" : "border-slate-200 bg-white"
+                            serviceOption === option ? "border-brand-blue bg-amber-50 text-slate-900" : "border-slate-200 bg-white"
                           }`}
                         >
                           <input
@@ -457,7 +463,7 @@ export default function Experience() {
                         Cancel
                       </button>
                       <button
-                        className="rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                        className="rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-slate-900 shadow-md shadow-amber-300/35 transition hover:-translate-y-0.5"
                         onClick={handleServiceConfirm}
                       >
                         Save selection
@@ -474,7 +480,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">2 · Meet the crew</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">2 · Meet the crew</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Certified, local, and ready</h2>
                   <p className="text-lg text-slate-300">
                     Preview who is coming to your home. Choose the focus that fits your request and we will pin that crew to your
@@ -496,7 +502,7 @@ export default function Experience() {
                     <h3 className="text-lg font-semibold text-white">{profile.name}</h3>
                     <p className="mt-2 text-sm text-slate-200">{profile.focus}</p>
                     <button
-                      className="mt-4 w-full rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                      className="mt-4 w-full rounded-full bg-brand-blue px-4 py-2 text-sm font-semibold text-slate-900 shadow-md shadow-amber-300/35 transition hover:-translate-y-0.5"
                       onClick={() => handleCrewSelect(profile.focus)}
                     >
                       Add crew focus
@@ -511,7 +517,7 @@ export default function Experience() {
               className="reveal grid gap-5 rounded-3xl border border-white/10 bg-white/10 p-7 shadow-xl shadow-black/30 lg:grid-cols-[1.1fr_0.9fr] lg:items-center"
             >
               <div className="space-y-4">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">3 · Service address</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">3 · Service address</p>
                 <h2 className="text-3xl font-bold text-white sm:text-4xl">Center on Southlake and confirm your address</h2>
                 <p className="text-lg text-slate-200">
                   Use our quick matcher to keep the map aligned. As soon as you select an address, it is logged to your tracker
@@ -557,7 +563,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">4 · About us</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">4 · About us</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Meet the team behind the tools</h2>
                   <p className="text-lg text-slate-300">
                     Local, insured professionals with a track record for tidy workmanship and responsive updates. Preview our
@@ -598,7 +604,7 @@ export default function Experience() {
                 </div>
 
                 <div className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-100">
-                  <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Who should we greet?</label>
+                  <label className="text-xs uppercase tracking-[0.2em] text-amber-200">Who should we greet?</label>
                   <input
                     type="text"
                     placeholder="Your name"
@@ -617,7 +623,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">5 · Service milestones</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">5 · Service milestones</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Follow the project horizontally</h2>
                   <p className="text-lg text-slate-200">
                     A simplified diagram shows how we move from first contact to cleanup. Each step locks into your tracker so you
@@ -649,8 +655,8 @@ export default function Experience() {
                 </div>
 
                 <div className="space-y-3 rounded-2xl border border-white/10 bg-slate-900/70 p-5 text-sm text-slate-100">
-                  <p className="text-xs uppercase tracking-[0.2em] text-sky-200">Service timeline capture</p>
-                  <label className="text-xs uppercase tracking-[0.18em] text-sky-200">Notification email</label>
+                  <p className="text-xs uppercase tracking-[0.2em] text-amber-200">Service timeline capture</p>
+                  <label className="text-xs uppercase tracking-[0.18em] text-amber-200">Notification email</label>
                   <input
                     type="email"
                     value={tracking.notificationEmail ?? tracking.email ?? ""}
@@ -660,7 +666,7 @@ export default function Experience() {
                   />
                   <p className="text-slate-300">Estimate and invoice notifications will route here and into your dashboard timeline.</p>
 
-                  <label className="text-xs uppercase tracking-[0.18em] text-sky-200">Schedule window</label>
+                  <label className="text-xs uppercase tracking-[0.18em] text-amber-200">Schedule window</label>
                   <div className="grid gap-2 md:grid-cols-2">
                     {scheduleWindows.map((window) => (
                       <button
@@ -686,7 +692,7 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">6 · Final contact</p>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">6 · Final contact</p>
                   <h2 className="text-3xl font-bold text-white sm:text-4xl">Share how to reach you and open live chat</h2>
                   <p className="text-lg text-slate-300">
                     Add an email and phone number for scheduling. The live widget connects you directly with the crew to lock your
@@ -701,7 +707,7 @@ export default function Experience() {
               <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
                 <div className="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-100">
                   <div className="grid gap-2">
-                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Email</label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-amber-200">Email</label>
                     <input
                       type="email"
                       placeholder="you@example.com"
@@ -712,7 +718,7 @@ export default function Experience() {
                   </div>
 
                   <div className="grid gap-2">
-                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Phone</label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-amber-200">Phone</label>
                     <input
                       type="tel"
                       placeholder="(817) 555-0199"
@@ -723,7 +729,7 @@ export default function Experience() {
                   </div>
 
                   <div className="grid gap-2">
-                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Text or phone updates?</label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-amber-200">Text or phone updates?</label>
                     <div className="grid grid-cols-2 gap-2">
                       {(["Text", "Phone"] as ContactPreference[]).map((option) => (
                         <button
@@ -742,7 +748,7 @@ export default function Experience() {
                   </div>
 
                   <div className="grid gap-2">
-                    <label className="text-xs uppercase tracking-[0.2em] text-sky-200">Upload project photos</label>
+                    <label className="text-xs uppercase tracking-[0.2em] text-amber-200">Upload project photos</label>
                     <input
                       type="file"
                       accept="image/*"
@@ -765,7 +771,7 @@ export default function Experience() {
                   </div>
 
                   <button
-                    className="w-full rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-white shadow-md shadow-sky-500/30 transition hover:-translate-y-0.5"
+                    className="w-full rounded-full bg-brand-blue px-6 py-2 text-sm font-semibold text-slate-900 shadow-md shadow-amber-300/35 transition hover:-translate-y-0.5"
                     onClick={() => handleContactSave(tracking.email ?? "", tracking.phone ?? "")}
                   >
                     Save contact + sync to tracker
@@ -795,7 +801,7 @@ export default function Experience() {
                   <button
                     className={`w-full rounded-full px-4 py-2 text-sm font-semibold transition ${
                       canSyncScheduling
-                        ? "bg-brand-blue text-white hover:-translate-y-0.5"
+                        ? "bg-brand-blue text-slate-900 shadow-amber-300/25 hover:-translate-y-0.5 hover:shadow-amber-200/45"
                         : "bg-slate-800 text-slate-300"
                     }`}
                     onClick={syncScheduling}
@@ -830,7 +836,7 @@ export default function Experience() {
               ref={makeSectionRef("completion")}
               className="reveal rounded-3xl border border-white/10 bg-slate-900/80 p-7 text-center shadow-xl shadow-black/30"
             >
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-200">Ready when you are</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">Ready when you are</p>
               <h2 className="text-3xl font-bold text-white sm:text-4xl">Finish the form and move to your dashboard</h2>
               <p className="mx-auto max-w-3xl text-lg text-slate-200">
                 The summary on the right captures each section. Sync your phone, preference, and photos into scheduling to
@@ -841,7 +847,7 @@ export default function Experience() {
                   className={`rounded-full px-7 py-3 text-sm font-semibold shadow-lg transition ${
                     completionLocked
                       ? "cursor-not-allowed bg-slate-800 text-slate-300 shadow-none"
-                      : "bg-brand-blue text-white shadow-sky-500/20 hover:-translate-y-0.5 hover:shadow-sky-500/40"
+                      : "bg-brand-blue text-slate-900 shadow-amber-300/25 hover:-translate-y-0.5 hover:shadow-amber-200/50"
                   }`}
                   href={completionLocked ? "#" : "/dashboard"}
                   aria-disabled={completionLocked}
@@ -872,13 +878,13 @@ export default function Experience() {
             <div className="space-y-3">
               {selectionSummary.map((item) => (
                 <div key={item.label} className="rounded-2xl border border-white/10 bg-white/5 p-3.5">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{item.label}</p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-amber-200">{item.label}</p>
                   <p className="mt-1 text-sm text-white">{item.value}</p>
                 </div>
               ))}
             </div>
             <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-3.5 text-sm text-slate-100">
-              <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Activity log</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-amber-200">Activity log</p>
               {activity.length === 0 ? (
                 <p className="mt-2 text-slate-300">Your choices will appear here as you move through the sections.</p>
               ) : (
