@@ -5,14 +5,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const floatingBadges = [
-  { label: "Licensed & Insured", position: "left-6 top-10" },
   { label: "Same-Day Support", position: "right-6 top-16" },
   { label: "Craftsman Verified", position: "left-12 bottom-12" },
 ];
 
 const brandMarks = [
-  { position: "left-6 top-6", size: "h-16 w-16", delay: 0.2 },
-  { position: "right-8 bottom-8", size: "h-24 w-24", delay: 0.3 },
+  { position: "left-6 top-6", size: 64, delay: 0.2 },
+  { position: "right-8 bottom-8", size: 96, delay: 0.3 },
 ];
 
 export default function Landing() {
@@ -43,42 +42,9 @@ export default function Landing() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="relative h-12 w-12 overflow-hidden rounded-full bg-white/90 p-1">
-            <Image
-              src="/handyman logo no background.png"
-              alt="Handyman logo"
-              fill
-              sizes="48px"
-              className="object-contain"
-              priority
-            />
-          </div>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold">
             Welcome to your #1 trusted team
           </p>
-        </motion.div>
-
-        <motion.div
-          className="mb-8 flex w-full max-w-2xl items-center gap-4 rounded-2xl border border-brand-gold/40 bg-slate-900/70 px-6 py-4 text-left shadow-xl shadow-amber-500/15 backdrop-blur"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-white/90 p-2">
-            <Image
-              src="/Official Logo of HOSL.svg"
-              alt="Handyman of Southlake master logo"
-              fill
-              sizes="64px"
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold">Official master brandmark</p>
-            <p className="text-base font-semibold text-slate-100">Handyman of Southlake · Trusted, consistent look across every touchpoint.</p>
-            <p className="text-sm text-slate-200/80">Anchoring the experience with the master logo while keeping our original crests intact.</p>
-          </div>
         </motion.div>
 
         <motion.h1
@@ -160,20 +126,18 @@ export default function Landing() {
       {brandMarks.map((mark) => (
         <motion.div
           key={mark.position}
-          className={`pointer-events-none absolute ${mark.position} z-0 rounded-2xl border border-brand-gold/30 bg-brand-night/70 p-3 shadow-lg shadow-amber-500/10 backdrop-blur`}
+          className={`pointer-events-none absolute ${mark.position} z-0`}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 0.8, scale: 1 }}
           transition={{ duration: 0.8, delay: mark.delay }}
         >
-          <div className={`relative ${mark.size} overflow-hidden`}>
-            <Image
-              src="/Official Logo of HOSL.svg"
-              alt="Handyman of Southlake brand mark"
-              fill
-              sizes="96px"
-              className="object-contain"
-            />
-          </div>
+          <Image
+            src="/Official Logo of HOSL.svg"
+            alt="Handyman of Southlake brand mark"
+            width={mark.size}
+            height={mark.size}
+            className="object-contain"
+          />
         </motion.div>
       ))}
 
@@ -183,12 +147,9 @@ export default function Landing() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.1, delay: 0.5 }}
       />
-      <motion.div
-        className="pointer-events-none absolute -right-16 bottom-10 h-64 w-64 rounded-full bg-amber-200/10 blur-3xl"
-        initial={{ opacity: 0, x: 30 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.1, delay: 0.55 }}
-      />
+      <div className="absolute z-10 rounded-full border border-brand-gold/30 bg-white/10 px-4 py-2 text-xs font-semibold text-slate-50 shadow-lg shadow-amber-500/20 backdrop-blur left-6 top-10">
+        Licensed &amp; Insured
+      </div>
     </main>
   );
 }
